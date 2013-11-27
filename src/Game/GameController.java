@@ -7,7 +7,7 @@ public class GameController {
 	//Views
   private StartServerScreen serverScreen;
 	private WaitingScreen waitingRoom;
-	private JoinGameScreen joinGame;
+	private JoinGameScreen joinGameScreen;
 	//Networks
 	private Server theServer;
 	

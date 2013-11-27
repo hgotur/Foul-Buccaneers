@@ -37,7 +37,7 @@ public class JoinGameScreen extends JFrame{
 		enterIP = new JLabel("Enter IP Adress of target Server");
 		ip = new JTextField();
 		username = new JTextField();
-		listen = new IPListener();
+		listen = new IPListener(game);
 		enter.addActionListener(listen);
 		
 		field1 = new JPanel(new GridLayout(2,2,10,10));
