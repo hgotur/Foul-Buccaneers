@@ -72,7 +72,7 @@ public class JoinGameScreen extends JFrame{
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource() == enter){
 			    setVisible(false);
-				game.joinGame(ip.getText());
+				game.joinGame(ip.getText(), getUsername());
 			}
 		}
 	}
