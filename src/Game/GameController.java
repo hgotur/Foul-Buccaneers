@@ -4,9 +4,13 @@ import view.*;
 import network.*;
 
 public class GameController {
-	private StartServerScreen serverScreen;
+	//Views
+  private StartServerScreen serverScreen;
 	private WaitingScreen waitingRoom;
 	private JoinGameScreen joinGame;
+	//Networks
+	private Server theServer;
+	
 	// Load the whats it called
 	public void start() {
 		SplashScreen screen1;
@@ -24,8 +28,8 @@ public class GameController {
 	public void newGame() {
 		waitingRoom = new WaitingScreen(serverScreen.getUsername(), new String(),new String(),new String("127.0.0.1"));
 		
-		Server theServer = new Server();
-    	Thread serverThread = new Thread(theServer);
-    	serverThread.start();
+		theServer = new Server();
+    Thread serverThread = new Thread(theServer);
+    serverThread.start();
 	}
 }
