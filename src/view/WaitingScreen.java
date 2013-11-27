@@ -25,6 +25,8 @@ public class WaitingScreen extends JFrame{
 	String playerTwo;
 	String playerThree;
 	String IPaddress;
+	JLabel [] players;
+	JLabel [] statuses;
 	JLabel pOneStatus;
 	JLabel pTwoStatus;
 	JLabel pThreeStatus;
@@ -42,26 +44,11 @@ public class WaitingScreen extends JFrame{
 		super("Game Lobby");
 		IPaddress = addr;		
 		setLayout(new BorderLayout());
-		pOneReady = false;
-		pTwoReady = false;
-		pThreeReady = false;
-		if(pOneReady == false){
-			pOneStatus = new JLabel(playerOne+" is not Aboard",SwingConstants.CENTER);
-		}
-		else{
-			pOneStatus = new JLabel(playerOne+" is Aboard!",SwingConstants.CENTER);
-		}
-		if(pTwoReady == false){
-			pTwoStatus = new JLabel(playerTwo+" is not Aboard",SwingConstants.CENTER);
-		}
-		else{
-			pTwoStatus = new JLabel(playerTwo+" is Aboard!",SwingConstants.CENTER);
-		}
-		if(pThreeReady == false){
-			pThreeStatus = new JLabel(playerThree+" is not Aboard",SwingConstants.CENTER);
-		}
-		else{
-			pThreeStatus = new JLabel(playerThree+" is Aboard!",SwingConstants.CENTER);
+		players = new JLabel[4];
+		statuses = new JLabel[4];
+		for (int i = 0; i < players.length; i++) {
+		    players[i] = new JLabel("");
+		    statuses[i] = new JLabel("");
 		}
 		listen = new WaitingListener();
 		
@@ -121,15 +108,16 @@ public class WaitingScreen extends JFrame{
 	}
 	
 	public void addPlayer(String username, int playerPosition) {
-	  switch(playerPosition) {
-	  case 1:
-	    break;
-	  case 2:
-	    break;
-	  case 3:
-	    break;
-	  }
+	  players[playerPosition].setText(username);
+	  statuses[playerPosition].setText("is not Aboard!");
 	}
 	
-
+	public void changeStatus(int playerPosition, Boolean status) {
+	  if(status) {
+	    statuses[playerPosition].setText("is Aboard!");
+	  }
+	  else {
+	    statuses[playerPositoin].setText("is not Aboard!");
+	  }
+	}
 }
