@@ -8,12 +8,12 @@ import network.*;
 
 public class GameController {
 	//Views
-  private StartServerScreen serverScreen;
-	private WaitingScreen waitingRoom;
-	private JoinGameScreen joinGameScreen;
+  protected StartServerScreen serverScreen;
+	protected WaitingScreen waitingRoom;
+	protected JoinGameScreen joinGameScreen;
 	//Networks
-	private Server theServer;
-	private Client theClient;
+	protected Server theServer;
+	protected Client theClient;
 	//Engine
 	private GameClientEngine clientEngine;
 	private GameServerEngine serverEngine;
@@ -32,8 +32,9 @@ public class GameController {
 		joinGameScreen = new JoinGameScreen(this);
 	}
 	
-	public void newGame() {    		
-  	theServer = new Server(this);
+	public void newGame() {
+	  serverEngine = new GameServerEngine(this);
+  	theServer = new Server(serverEngine);
     Thread serverThread = new Thread(theServer);
     serverThread.start();
     
@@ -46,7 +47,7 @@ public class GameController {
 	}
 	
 	public void joinGame(String ipaddress, String username) {
-	  waitingRoom = new WaitingScreen(username, new String(),new String(),new String(ipaddress));
+	  waitingRoom = new WaitingScreen(ipaddress);
 	  theClient = new Client(this, ipaddress);
     theClient.sendUsername(username);
     

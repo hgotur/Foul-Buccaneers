@@ -1,5 +1,7 @@
 package network;
 
+import java.net.ServerSocket;
+
 public class ServerAcceptThread implements Runnable {
   
   private Server server;
@@ -11,22 +13,20 @@ public class ServerAcceptThread implements Runnable {
   }
   
   public void run() {
-      int i = 0;
-      while (true) {
-    	  // break out when game starts
-    	  if (server.sockets.size() < 4) {
-    		  ClientServerSocket clientServerSocket = new ClientServerSocket("127.0.0.1", 45001);
-        	  clientServerSocket.startServer(serverSocket);
-        	  if(!server.hasGameStarted()) {
-        	    server.sockets.add(clientServerSocket);
-        	    Thread serverReceiver = new Thread(new ServerReceiver(server, clientServerSocket));
-                serverReceiver.start();
-        	  }
-        	  else {
-        	    break;
-        	  }
+    while (true) {
+  	  // break out when game starts
+  	  if (server.sockets.size() < 4) {
+  		  ClientServerSocket clientServerSocket = new ClientServerSocket("127.0.0.1", 45001);
+    	  clientServerSocket.startServer(serverSocket);
+    	  if(!server.hasGameStarted()) {
+    	    server.sockets.add(clientServerSocket);
+    	    Thread serverReceiver = new Thread(new ServerReceiver(server, clientServerSocket, server.sockets.size()));
+          serverReceiver.start();
     	  }
-      }
+    	  else {
+    	    break;
+    	  }
+  	  }
+    }
   }
-
 }

@@ -5,6 +5,7 @@ import static java.lang.System.out;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import Game.*;
 
@@ -15,17 +16,17 @@ public class Server implements Runnable {
 //  private ClientServerSocket server4;
   
   protected ArrayList<ClientServerSocket> sockets;
-  private GameController game;
+  private GameServerEngine game;
   private ServerSender serverSender;
   private Thread serverAcceptThread;
   
-  public Server(GameController theGame) {
+  public Server(GameServerEngine theGame) {
 //      server1 = new ClientServerSocket("127.0.0.1", 45001);
 //      server2 = new ClientServerSocket("127.0.0.1", 45001);
 //      server3 = new ClientServerSocket("127.0.0.1", 45001);
 //      server4 = new ClientServerSocket("127.0.0.1", 45001);
 	  sockets = new ArrayList<ClientServerSocket>(0);
-      game = theGame;
+    game = theGame;
   }
 
   public void run() {
@@ -50,6 +51,17 @@ public class Server implements Runnable {
   
   public Boolean hasGameStarted() {
       return game.started;
+  }
+  
+  public void translate(String command, ArrayList<String> values, int clientID) {    
+    switch (command) {
+      case "P": 
+        game.addPlayer(values.get(0), clientID);
+        break;
+      default:
+        assert false;
+      
+    }
   }
 
 }

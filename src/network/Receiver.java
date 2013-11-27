@@ -12,8 +12,8 @@ public class Receiver implements Runnable {
 		String recvdStr;
 
 		while(true) {
-	        recvdStr = receiverSocket.recvString();
-	        out.println(recvdStr);
+	      recvdStr = receiverSocket.recvString();
+	      out.println(recvdStr);
 	    }
 	}
 }

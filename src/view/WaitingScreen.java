@@ -37,27 +37,14 @@ public class WaitingScreen extends JFrame{
 	GameScreen1 game;
 	
 	
-	public WaitingScreen( String p1, String p2, String p3, String addr){
+	public WaitingScreen(String addr){
 		
 		super("Game Lobby");
-		playerOne = p1;
-		playerTwo = p2;
-		playerThree = p3;
-		IPaddress = addr;
-		if(p1 == null){
-			playerOne = new String("Player One");
-		}
-		if(p2 == null){
-			playerTwo = new String("Player Two");
-		}
-		if(p3 == null){
-			playerThree = new String("Player Three");
-		}
-		
+		IPaddress = addr;		
 		setLayout(new BorderLayout());
 		pOneReady = false;
-		pTwoReady = true;
-		pThreeReady = true;
+		pTwoReady = false;
+		pThreeReady = false;
 		if(pOneReady == false){
 			pOneStatus = new JLabel(playerOne+" is not Aboard",SwingConstants.CENTER);
 		}
@@ -113,9 +100,7 @@ public class WaitingScreen extends JFrame{
 		status.add(pThreeStatus);
 		GetReady.add(ready,BorderLayout.WEST);
 		GetReady.add(startGame, BorderLayout.EAST);
-		
-		
-		
+
 		add(status, BorderLayout.NORTH);
 		add(GetReady, BorderLayout.SOUTH);
 		
@@ -127,14 +112,23 @@ public class WaitingScreen extends JFrame{
 	public class WaitingListener implements ActionListener{
 		
 		public void actionPerformed(ActionEvent e){
-			
-			
 			if(e.getSource() == startGame){
 				setVisible(false);
 				game = new GameScreen1(1);
 			}
 		}
 		
+	}
+	
+	public void addPlayer(String username, int playerPosition) {
+	  switch(playerPosition) {
+	  case 1:
+	    break;
+	  case 2:
+	    break;
+	  case 3:
+	    break;
+	  }
 	}
 	
 

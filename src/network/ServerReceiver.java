@@ -2,6 +2,7 @@ package network;
 
 import static java.lang.System.out;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Game.GameServerEngine;
@@ -9,10 +10,12 @@ import Game.GameServerEngine;
 public class ServerReceiver implements Runnable {
 	private ClientServerSocket receiverSocket;
 	private Server server;
+	private int clientNumber;
 
-	public ServerReceiver(Server theServer, ClientServerSocket inSocket) {
-	    server = theServer;
+	public ServerReceiver(Server theServer, ClientServerSocket inSocket, int clientID) {
+	  server = theServer;
 		receiverSocket = inSocket;
+		clientNumber = clientID;
 	}
 	
 	public void run() {
@@ -21,31 +24,13 @@ public class ServerReceiver implements Runnable {
 		while(true) {
 	        recvdStr = receiverSocket.recvString();
 	        out.println(recvdStr);
-	        
-	        decode_and_exec(recvdStr);
+	        Scanner sc = new Scanner(recvdStr);
+	        String command = sc.next();
+	        ArrayList<String> args = new ArrayList<String>(0);
+	        while (sc.hasNext() ) {
+	          args.add(sc.next());
+	        }
+	        server.translate(command, args, clientNumber);
 	    }
-	}
-	
-	private void decode_and_exec(String str) {
-		Scanner sc = new Scanner(str);
-		
-		int messageType;
-		messageType = sc.nextInt();
-		
-		switch (messageType) {
-			case 1: break;
-			case 2: break;
-			case 3: break;
-			case 4: break;
-			case 5: break;
-			case 6: break;
-			case 7: break;
-			case 8: break;
-			case 9: break;
-			case 10: break;
-			default:
-				assert false;
-			
- 		}
 	}
 }
