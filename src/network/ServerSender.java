@@ -17,12 +17,14 @@ public class ServerSender implements Runnable {
 		senderSocket4 = inSocket4;
 	}
 
+	// shouldn't be run. This should be a function called encode and send that gets called by the game controller?
 	public void run() {
 		Scanner sc = new Scanner(System.in);
 		String input;
 
 		while (true) {
 	        input = sc.nextLine();
+	        // encode, then send
 	        senderSocket1.sendString(input);
 	        senderSocket2.sendString(input);
 	        senderSocket3.sendString(input);
