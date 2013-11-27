@@ -22,14 +22,21 @@ public class GameController {
 	}
 	
 	public void getJoinGameInfo() {
-		joinGame = new JoinGameScreen(this);
+		joinGameScreen = new JoinGameScreen(this);
 	}
 	
 	public void newGame() {
-		waitingRoom = new WaitingScreen(serverScreen.getUsername(), new String(),new String(),new String("127.0.0.1"));
-		
-		theServer = new Server();
-    Thread serverThread = new Thread(theServer);
-    serverThread.start();
+    	waitingRoom = new WaitingScreen(serverScreen.getUsername(), new String(),new String(),new String("127.0.0.1"));
+    		
+    	theServer = new Server();
+        Thread serverThread = new Thread(theServer);
+        serverThread.start();
+	}
+	
+	public void joinGame(String ipaddress) {
+	    Client theClient = new Client(ipaddress);
+    	Thread clientThread = new Thread(theClient);
+    	clientThread.start();
+    	//send server username
 	}
 }

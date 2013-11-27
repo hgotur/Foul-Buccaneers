@@ -122,9 +122,6 @@ public class WaitingScreen extends JFrame{
 		setSize(800,600);
 		setVisible(true);
 		setResizable(false);
-		
-		
-		
 	}
 	
 	public class WaitingListener implements ActionListener{

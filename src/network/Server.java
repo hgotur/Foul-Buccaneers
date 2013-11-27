@@ -19,6 +19,9 @@ public class Server implements Runnable {
 
   public void run() {
     try {
+    // add an array
+    // while (game not started) {
+        // if numPlayers < 4 accept connection
       ServerSocket serverSocket = new ServerSocket(45001);
       out.println("Waiting for client1 to connect...");
       server1.startServer(serverSocket);

@@ -56,7 +56,7 @@ public class JoinGameScreen extends JFrame{
 		
 	}
 	
-	public String getName(){
+	public String getUsername(){
 		return(username.getText());
 	}
 	
@@ -65,11 +65,14 @@ public class JoinGameScreen extends JFrame{
 	}
 	
 	public class IPListener implements ActionListener{
+	    private GameController game;
+	    public IPListener(GameController thegame){
+	        game = thegame;
+	    }
 		public void actionPerformed(ActionEvent e){
-			
 			if(e.getSource() == enter){
-				wait = new WaitingScreen(username.getText(),new String(), new String(), ip.getText());
-				setVisible(false);
+			    setVisible(false);
+				game.joinGame(ip.getText());
 			}
 		}
 	}
