@@ -1,10 +1,13 @@
 package network;
 import static java.lang.System.out;
+import Game.*;
 
 public class Client implements Runnable {
   private ClientServerSocket theClient;
+  private GameController game;
 
-  public Client(String ipAddr) {
+  public Client(GameController theGame, String ipAddr) {
+	  game = theGame;
       theClient = new ClientServerSocket(ipAddr, 45001);
   }
 

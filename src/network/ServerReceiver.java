@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import Game.GameServerEngine;
 
-public class ServerReceiver {
+public class ServerReceiver implements Runnable {
 	private ClientServerSocket receiverSocket;
 	
 

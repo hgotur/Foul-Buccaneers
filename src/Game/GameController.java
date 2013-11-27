@@ -28,13 +28,13 @@ public class GameController {
 	public void newGame() {
     	waitingRoom = new WaitingScreen(serverScreen.getUsername(), new String(),new String(),new String("127.0.0.1"));
     		
-    	theServer = new Server();
+    	theServer = new Server(this);
         Thread serverThread = new Thread(theServer);
         serverThread.start();
 	}
 	
 	public void joinGame(String ipaddress) {
-	    Client theClient = new Client(ipaddress);
+	    Client theClient = new Client(this, ipaddress);
     	Thread clientThread = new Thread(theClient);
     	clientThread.start();
     	//send server username

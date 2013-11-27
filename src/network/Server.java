@@ -3,18 +3,21 @@ import static java.lang.System.out;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import Game.*;
 
 public class Server implements Runnable {
   private ClientServerSocket server1;
   private ClientServerSocket server2;
   private ClientServerSocket server3;
   private ClientServerSocket server4;
+  private GameController game;
 
-  public Server() {
+  public Server(GameController theGame) {
       server1 = new ClientServerSocket("127.0.0.1", 45001);
       server2 = new ClientServerSocket("127.0.0.1", 45001);
       server3 = new ClientServerSocket("127.0.0.1", 45001);
       server4 = new ClientServerSocket("127.0.0.1", 45001);
+      game = theGame;
   }
 
   public void run() {
