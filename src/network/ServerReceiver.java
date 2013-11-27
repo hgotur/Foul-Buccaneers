@@ -8,6 +8,7 @@ import Game.GameServerEngine;
 
 public class ServerReceiver {
 	private ClientServerSocket receiverSocket;
+	
 
 	public ServerReceiver(ClientServerSocket inSocket) {
 		receiverSocket = inSocket;
