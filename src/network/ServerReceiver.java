@@ -8,9 +8,10 @@ import Game.GameServerEngine;
 
 public class ServerReceiver implements Runnable {
 	private ClientServerSocket receiverSocket;
-	
+	private Server server;
 
-	public ServerReceiver(ClientServerSocket inSocket) {
+	public ServerReceiver(Server theServer, ClientServerSocket inSocket) {
+	    server = theServer;
 		receiverSocket = inSocket;
 	}
 	

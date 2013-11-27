@@ -14,16 +14,17 @@ public class Server implements Runnable {
 //  private ClientServerSocket server3;
 //  private ClientServerSocket server4;
   
-  private ArrayList<ClientServerSocket> server;
+  protected ArrayList<ClientServerSocket> sockets;
   private GameController game;
   private ServerSender serverSender;
-
+  private Thread serverAcceptThread;
+  
   public Server(GameController theGame) {
 //      server1 = new ClientServerSocket("127.0.0.1", 45001);
 //      server2 = new ClientServerSocket("127.0.0.1", 45001);
 //      server3 = new ClientServerSocket("127.0.0.1", 45001);
 //      server4 = new ClientServerSocket("127.0.0.1", 45001);
-	  server = new ArrayList<ClientServerSocket>(0);
+	  sockets = new ArrayList<ClientServerSocket>(0);
       game = theGame;
   }
 
@@ -34,24 +35,9 @@ public class Server implements Runnable {
         // if numPlayers < 4 accept connection
       ServerSocket serverSocket = new ServerSocket(45001);
       
-      int i = 0;
-      while (true) {
-    	  // break out when game starts
-    	  if (server.size() < 4) {
-    		  ClientServerSocket clientServerSocket = new ClientServerSocket("127.0.0.1", 45001);
-        	  
-        	  out.println("Waiting for client1 to connect...");
-        	  clientServerSocket.startServer(serverSocket);
-        	  
-        	  
-        	  
-        	  Thread serverReceiver = new Thread(new ServerReceiver(clientServerSocket));
-              //Thread serverSender = new Thread(new ServerSender(server1, server2, server3, server4));
-              serverReceiver.start();  
-    	  }
-      }
+      serverAcceptThread = new Thread(new ServerAcceptThread(this, serverSocket));
       
-      serverSender = new ServerSender(server);
+      serverSender = new ServerSender(sockets);
 //      Thread serverSenderThread = new Thread(serverSender);
 //      serverSenderThread.start();
     }
@@ -60,6 +46,10 @@ public class Server implements Runnable {
       out.println(ioe.getMessage());
       System.exit(7);
     }
+  }
+  
+  public Boolean hasGameStarted() {
+      return game.started;
   }
 
 }
