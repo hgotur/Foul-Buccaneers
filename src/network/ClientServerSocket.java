@@ -38,6 +38,7 @@ public class ClientServerSocket {
   }
   public void startServer(ServerSocket serverSock) {
     try{
+      out.println("Waiting for connection...");
       socket = serverSock.accept();
       outData = new DataOutputStream(socket.getOutputStream());
       inData = new DataInputStream(socket.getInputStream());

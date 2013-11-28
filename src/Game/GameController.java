@@ -39,7 +39,7 @@ public class GameController {
     serverThread.start();
     
     try {
-      joinGame(InetAddress.getLocalHost().getHostAddress(), serverScreen.getName());
+      joinGame(InetAddress.getLocalHost().getHostAddress(), serverScreen.getUsername());
     } catch (UnknownHostException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

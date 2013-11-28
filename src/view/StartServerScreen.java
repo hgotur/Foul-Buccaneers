@@ -15,9 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 
-public class StartServerScreen extends JFrame{
+public class StartServerScreen extends JFrame {
 	
-	JTextField username;
+	JTextField usernameField;
 	JButton enter;
 	JLabel enterUsername;
 	JPanel serv;
@@ -40,7 +40,7 @@ public class StartServerScreen extends JFrame{
 		setLayout(new BorderLayout());
 		setSize(400,200);
 		setResizable(false);
-		username = new JTextField();
+		usernameField = new JTextField(50);
 		enter = new JButton("Start Server");
 		enterUsername = new JLabel("Enter Username");
 		serv = new JPanel(new GridLayout(1,2,10,10));
@@ -48,7 +48,7 @@ public class StartServerScreen extends JFrame{
 		enter.addActionListener(new EnterListener(game));
 		
 		serv.add(enterUsername);
-		serv.add(username);
+		serv.add(usernameField);
 		
 		add(serv, BorderLayout.NORTH);
 		add(enter, BorderLayout.SOUTH);
@@ -59,6 +59,6 @@ public class StartServerScreen extends JFrame{
 	}
 	
 	public String getUsername(){
-		return username.getText();
+		return usernameField.getText();
 	}
 }

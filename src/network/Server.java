@@ -37,6 +37,7 @@ public class Server implements Runnable {
       ServerSocket serverSocket = new ServerSocket(45001);
       
       serverAcceptThread = new Thread(new ServerAcceptThread(this, serverSocket));
+      serverAcceptThread.start();
       
       serverSender = new ServerSender(sockets);
 //      Thread serverSenderThread = new Thread(serverSender);
@@ -55,7 +56,7 @@ public class Server implements Runnable {
   
   public void translate(String command, ArrayList<String> values, int clientID) {    
     switch (command) {
-      case "P": 
+      case "U": 
         game.addPlayer(values.get(0), clientID);
         break;
       default:

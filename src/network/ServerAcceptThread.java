@@ -13,6 +13,7 @@ public class ServerAcceptThread implements Runnable {
   }
   
   public void run() {
+    System.out.println("Starting accepting connections.");
     while (true) {
   	  // break out when game starts
   	  if (server.sockets.size() < 4) {
