@@ -46,9 +46,13 @@ public class WaitingScreen extends JFrame{
 		setLayout(new BorderLayout());
 		players = new JLabel[4];
 		statuses = new JLabel[4];
+		
+		status.add(IPaddr);
 		for (int i = 0; i < players.length; i++) {
 		    players[i] = new JLabel("");
 		    statuses[i] = new JLabel("");
+		    status.add(players[i]);
+		    status.add(statuses[i]);
 		}
 		listen = new WaitingListener();
 		
@@ -60,31 +64,9 @@ public class WaitingScreen extends JFrame{
 		startGame.addActionListener(listen);
 		status = new JPanel(new GridLayout(4,1,0,10));
 		GetReady = new JPanel(new BorderLayout());
-		ready.addItemListener(new ItemListener(){
-								public void itemStateChanged(ItemEvent e){
-									if(pOneReady == false){
-										pOneReady = true;
-										pOneStatus.setText(playerOne+" is Aboard!");
-										System.out.println(pOneReady);
-									}
-									else{
-										pOneReady = false;
-										pOneStatus.setText(playerOne+" is not Aboard");
-									}
-									if(pOneReady == true && pTwoReady == true && pThreeReady == true){
-										startGame.setEnabled(true);
-									}
-									else{
-										startGame.setEnabled(false);
-									}
-									
-								}
-								});
 		
-		status.add(IPaddr);
-		status.add(pOneStatus);
-		status.add(pTwoStatus);
-		status.add(pThreeStatus);
+		ready.addItemListener(new ReadyListener());
+		
 		GetReady.add(ready,BorderLayout.WEST);
 		GetReady.add(startGame, BorderLayout.EAST);
 
@@ -94,6 +76,27 @@ public class WaitingScreen extends JFrame{
 		setSize(800,600);
 		setVisible(true);
 		setResizable(false);
+	}
+	
+	public class ReadyListener implements ItemListener {
+		public void itemStateChanged(ItemEvent e){
+			if(pOneReady == false){
+				pOneReady = true;
+				pOneStatus.setText(playerOne+" is Aboard!");
+				System.out.println(pOneReady);
+			}
+			else{
+				pOneReady = false;
+				pOneStatus.setText(playerOne+" is not Aboard");
+			}
+			if(pOneReady == true && pTwoReady == true && pThreeReady == true){
+				startGame.setEnabled(true);
+			}
+			else{
+				startGame.setEnabled(false);
+			}
+			
+		}
 	}
 	
 	public class WaitingListener implements ActionListener{
@@ -117,7 +120,7 @@ public class WaitingScreen extends JFrame{
 	    statuses[playerPosition].setText("is Aboard!");
 	  }
 	  else {
-	    statuses[playerPositoin].setText("is not Aboard!");
+	    statuses[playerPosition].setText("is not Aboard!");
 	  }
 	}
 }

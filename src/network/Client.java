@@ -20,14 +20,38 @@ public class Client {
   }
   
   public void sendUsername(String user) {
-    user = "P " + user;
+    user = "U " + user;
     sender.sendString(user);
+  }
+  
+  public String encode(String [] args) {
+      String message = "";
+      
+      foreach(String arg : args) {
+          message += (" " + arg);
+      }
+      
+      return message;
   }
   
   public void translate(String command, String [] value) {
     switch(command) {
-    case "P": //do something
+    case "U":   // username
       break;
+    case "P":   // players
+    case "GS":  // game start
+        break;
+    case "GE":  // game end
+        break;
+    case "LS":  // level start
+        break;
+    case "LE":  // level end
+        break;
+    case "NI":   // new instruction
+        break;
+    case "NS":   // new score
+        break;
+    
     }
   }
 
