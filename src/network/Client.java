@@ -27,7 +27,7 @@ public class Client {
   public String encode(String [] args) {
       String message = "";
       
-      foreach(String arg : args) {
+      for(String arg : args) {
           message += (" " + arg);
       }
       

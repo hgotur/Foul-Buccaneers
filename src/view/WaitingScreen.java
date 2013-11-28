@@ -47,6 +47,8 @@ public class WaitingScreen extends JFrame{
 		players = new JLabel[4];
 		statuses = new JLabel[4];
 		
+		IPaddr = new JLabel("IP Address of this server: "+IPaddress,SwingConstants.CENTER);
+		IPaddr.setForeground(Color.BLUE);
 		status.add(IPaddr);
 		for (int i = 0; i < players.length; i++) {
 		    players[i] = new JLabel("");
@@ -56,8 +58,7 @@ public class WaitingScreen extends JFrame{
 		}
 		listen = new WaitingListener();
 		
-		IPaddr = new JLabel("IP Address of this server: "+IPaddress,SwingConstants.CENTER);
-		IPaddr.setForeground(Color.BLUE);
+		
 		ready = new JCheckBox("I'm ready to play",false);
 		startGame = new JButton("Start Game");
 		startGame.setEnabled(false);
