@@ -47,6 +47,7 @@ public class WaitingScreen extends JFrame{
 		players = new JLabel[4];
 		statuses = new JLabel[4];
 		
+		status = new JPanel(new GridLayout(4,1,0,10));
 		IPaddr = new JLabel("IP Address of this server: "+IPaddress,SwingConstants.CENTER);
 		IPaddr.setForeground(Color.BLUE);
 		status.add(IPaddr);
@@ -63,7 +64,7 @@ public class WaitingScreen extends JFrame{
 		startGame = new JButton("Start Game");
 		startGame.setEnabled(false);
 		startGame.addActionListener(listen);
-		status = new JPanel(new GridLayout(4,1,0,10));
+		
 		GetReady = new JPanel(new BorderLayout());
 		
 		ready.addItemListener(new ReadyListener());
