@@ -13,7 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
 
-public class GameScreen1 extends JFrame{
+public class GameScreen extends JFrame{
 	
 	JButton button1;
 	JButton button2;
@@ -29,10 +29,10 @@ public class GameScreen1 extends JFrame{
 	JLabel instructions;
 	TitledBorder buttonBorder;
 	
-	public GameScreen1(){
+	public GameScreen(){
 		super("ARRGH");
 	}
-	public GameScreen1(int level){
+	public GameScreen(int level){
 		
 		super("ARRGH");
 		timer = new JLabel("10 Seconds");
@@ -79,7 +79,7 @@ public class GameScreen1 extends JFrame{
 		
 	}
 		
-	public class Game1Listener implements ActionListener{
+	public class GameListener implements ActionListener{
 		
 		public void actionPerformed(ActionEvent e){
 			
