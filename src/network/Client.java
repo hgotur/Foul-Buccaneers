@@ -57,7 +57,7 @@ public class Client {
     	break;
     case "C":	// receive command
     	username = value.get(0);
-    	game.readCommand(username, value.get(1));
+    	game.readCommand(username, Integer.parseInt(value.get(1)));
     	break;
     /*case "GE":  // game end
         break;

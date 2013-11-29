@@ -85,8 +85,8 @@ public class GameClientEngine {
 		levelScreen = new LevelScreen(curLevel, playerButtons);
 	}
 	
-	public void readCommand(String username, String command) {
+	public void readCommand(String username, int command) {
 		if (!isUser(username)) return;
-		levelScreen.newCommand(command);
+		levelScreen.newCommand(levelCommands.get(command));
 	}
 }
