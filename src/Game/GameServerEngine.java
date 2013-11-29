@@ -18,6 +18,7 @@ public class GameServerEngine {
   
   public boolean started = false;
   public int currentLevel;
+  public int shipDamage = 10;
   
   Random random = new Random();
   
@@ -106,7 +107,7 @@ public class GameServerEngine {
     game.server.sendCommand(player, commandIndex);
     this.commandsSent++;
     if(this.commandsSent > 20) {
-      //Level ends and we move on.
+      game.server.sendLevelComplete();
     }
   }
   
@@ -126,6 +127,21 @@ public class GameServerEngine {
         Command complete = activeCommands.remove(i);
         game.server.sendCommandComplete(complete.player, complete.index);
         this.generateCommand(complete.player);
+      }
+    }
+  }
+  
+  public void commandFailed(int ID) {
+    for(int i = 0; i < activeCommands.size(); i++) {
+      if(activeCommands.get(i).index == ID) {
+        Command failed = activeCommands.remove(i);
+        this.shipDamage--;
+        if(this.shipDamage == 0) {
+          game.server.sendGameOver();
+          return;
+        }
+        game.server.sendCommandFailed(failed.player, failed.index, this.shipDamage);
+        this.generateCommand(failed.player);
       }
     }
   }

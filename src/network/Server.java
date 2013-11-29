@@ -82,6 +82,19 @@ public class Server implements Runnable {
     serverSender.sendToAll("CC " + player + " " + index);
   }
   
+  public void sendCommandFailed(String player, int index, int damage) {
+    serverSender.sendToAll("F " + player + " " + index);
+    serverSender.sendToAll("SD " + damage);
+  }
+  
+  public void sendGameOver() {
+    serverSender.sendToAll("GO");
+  }
+  
+  public void sendLevelComplete() {
+    serverSender.sendToAll("LC");
+  }
+  
   public void translate(String command, ArrayList<String> values, int clientID) {  
     switch (command) {
       case "U": 
