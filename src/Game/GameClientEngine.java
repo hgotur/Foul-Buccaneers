@@ -84,7 +84,6 @@ public class GameClientEngine {
 		}
 		
 		levelScreen.addButtons(buttonText, buttons);
-		
 	}
 	
 	public void levelStart() {

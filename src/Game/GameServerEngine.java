@@ -11,7 +11,7 @@ import network.*;
 
 public class GameServerEngine {
   private GameController game;
-  private ArrayList<String> availableCommands;
+  private ArrayList<Integer> availableCommands;
   private ArrayList<Command> activeCommands;
   private int commandsSent = 0;
   ArrayList<Player> players;
@@ -72,7 +72,7 @@ public class GameServerEngine {
       System.out.println("Incorrect URI format");
     }
     
-    availableCommands = new ArrayList<String>(0);
+    availableCommands = new ArrayList<Integer>(0);
     ArrayList<Integer> commandIndexes = new ArrayList<Integer>(levelCommands.size());
     
     for(int i = 0; i < levelCommands.size(); i++) {
@@ -84,10 +84,14 @@ public class GameServerEngine {
       for(int i = 0; i < 4; i++){
         int index = random.nextInt(commandIndexes.size());
         int commandIndex = commandIndexes.remove(index);
-        availableCommands.add(levelCommands.get(commandIndex));
+        availableCommands.add(commandIndex);
         availableButtons[i] = commandIndex;
       }
       game.server.sendLevelButtons(player.name, availableButtons);
+    }
+    
+    for(int command : availableCommands) {
+      System.out.println(levelCommands.get(command));
     }
     
     game.server.sendStartLevel();
@@ -97,7 +101,7 @@ public class GameServerEngine {
   }
   
   public void generateCommand(String player) {
-    int commandIndex = random.nextInt(availableCommands.size());
+    int commandIndex = availableCommands.get(random.nextInt(availableCommands.size()));
     activeCommands.add(new Command(player, commandIndex));
     game.server.sendCommand(player, commandIndex);
     this.commandsSent++;
