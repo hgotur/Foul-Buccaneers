@@ -98,5 +98,9 @@ public class Client {
 	  String message = "B " + buttonIndex;
 	  sender.sendString(message);
   }
+  
+  public void sendCommandFailed(int commandIndex) {
+	  sender.sendString("F " + commandIndex);
+  }
 
 }

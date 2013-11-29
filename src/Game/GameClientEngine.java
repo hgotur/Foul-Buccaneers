@@ -18,6 +18,7 @@ public class GameClientEngine {
 	ArrayList<String> levelButtons;
 	ArrayList<String> playerButtons;
 	int curLevel;
+	int curCommandIndex;
 	
 	public GameClientEngine(GameController theGame) {
 	  game = theGame;
@@ -87,15 +88,21 @@ public class GameClientEngine {
 	}
 	
 	public void levelStart() {
+		game.gameStartScreen.setVisible(false);
 		levelScreen.setVisible(true);
 	}
 	
 	public void readCommand(String username, int command) {
 		if (!isUser(username)) return;
 		levelScreen.newCommand(levelCommands.get(command));
+		curCommandIndex = command;
 	}
 	
 	public void sendButtonInput(int buttonIndex) {
 		game.client.sendButtonInput(buttonIndex);		
+	}
+	
+	public void sendCommandFailed() {
+		game.client.sendCommandFailed(curCommandIndex);
 	}
 }

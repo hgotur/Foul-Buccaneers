@@ -11,6 +11,7 @@ public class GameController {
   protected StartServerScreen serverScreen;
 	protected WaitingScreen waitingRoom;
 	protected JoinGameScreen joinGameScreen;
+	protected GameStartScreen gameStartScreen;
 	//Networks
 	protected Server server;
 	protected Client client;
@@ -63,7 +64,7 @@ public class GameController {
 	
 	public void letsGetStarted() {
 	  waitingRoom.setVisible(false);
-	  GameStartScreen screen = new GameStartScreen();
+	  gameStartScreen = new GameStartScreen();
 	}
 	
 }

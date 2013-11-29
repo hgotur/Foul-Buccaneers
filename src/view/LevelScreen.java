@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JDialog;
 import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
+import javax.swing.Timer;
 
 import Game.*;
 
@@ -22,11 +23,13 @@ public class LevelScreen extends JFrame{
 	JPanel buttonPanel;
 	JPanel timeInstr;
 	
-	JLabel timer;
+	JLabel timerLabel;
 	JLabel instructions;
 	TitledBorder buttonBorder;
 	
 	ArrayList<JButton> buttons;
+	
+	Timer timer;
 	
 	public LevelScreen(){
 		super("ARRGH");
@@ -37,7 +40,7 @@ public class LevelScreen extends JFrame{
 		
 		game = theGame;
 		
-		timer = new JLabel("10 Seconds");
+		timerLabel = new JLabel("");
 		buttonBorder = new TitledBorder("Actions");
 		setSize(800,600);
 		setResizable(false);
@@ -57,9 +60,11 @@ public class LevelScreen extends JFrame{
 		buttonPanel.setBorder(buttonBorder);
 		
 		timeInstr = new JPanel(new GridLayout(1,2,10,0));
-		timeInstr.add(timer);
+		timeInstr.add(timerLabel);
 		timeInstr.add(instructions);
-			
+		
+		timer = new Timer(1000, new TimerListener());
+		
 		add(buttonPanel, BorderLayout.SOUTH);
 		add(timeInstr, BorderLayout.NORTH);
 		
@@ -69,6 +74,9 @@ public class LevelScreen extends JFrame{
 	
 	public void newCommand(String command) {
 		instructions.setText(command);
+		timer.stop();
+		timer.restart();
+		
 	}
 	
 	public void addButtons(ArrayList<String> buttonText, ArrayList<Integer> buttonIndex) {
@@ -86,6 +94,18 @@ public class LevelScreen extends JFrame{
 		public void actionPerformed(ActionEvent e){
 			game.sendButtonInput(index);
 		}
+	}
+	
+	public class TimerListener implements ActionListener {
+		private int elapsedSeconds = 30;
+	    public void actionPerformed(ActionEvent evt){
+	        elapsedSeconds--;
+	        timerLabel.setText("" + elapsedSeconds);
+	        if(elapsedSeconds == 0){
+	            timer.stop();
+	            game.sendCommandFailed();
+	        }
+	    }
 	}
 	
 }
