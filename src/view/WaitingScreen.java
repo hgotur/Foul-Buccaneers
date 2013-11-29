@@ -115,4 +115,13 @@ public class WaitingScreen extends JFrame{
 			}
 		}
 	}
+	
+	public void clearWaitingRoom() {
+	  for(JLabel playerLabel : playerLabels) {
+	    playerLabel.setText("");
+	  }
+	  for(JLabel statusLabel : statusLabels) {
+	    statusLabel.setText("");
+	  }
+	}
 }

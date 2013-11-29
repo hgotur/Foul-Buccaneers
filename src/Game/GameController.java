@@ -34,8 +34,8 @@ public class GameController {
 	}
 	
 	public void newGame() {
-	  serverEngine = new GameServerEngine(this);
   	theServer = new Server(serverEngine);
+  	serverEngine = new GameServerEngine(this, theServer);
     Thread serverThread = new Thread(theServer);
     serverThread.start();
     
