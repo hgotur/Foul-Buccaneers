@@ -80,7 +80,7 @@ public class GameClientEngine {
 		levelScreen = new LevelScreen(this, curLevel, buttons.size());
 		ArrayList<String> buttonText = new ArrayList<String>(0);
 		for (int i : buttons) {
-			buttonText.add(levelCommands.get(i));
+			buttonText.add(levelButtons.get(i));
 		}
 		
 		levelScreen.addButtons(buttonText, buttons);
