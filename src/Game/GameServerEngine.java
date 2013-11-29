@@ -75,7 +75,7 @@ public class GameServerEngine {
     
     for(Player player : players) {
       int [] availableButtons = new int [4];
-      for(int i = 4; i < 4; i++){
+      for(int i = 0; i < 4; i++){
         int index = random.nextInt(levelCommands.size());
         availableCommands.add(levelCommands.remove(index));
         availableButtons[i] = index;
