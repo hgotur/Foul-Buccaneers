@@ -11,11 +11,15 @@ import network.*;
 
 public class GameServerEngine {
   private GameController game;
-  private ArrayList<String> activeCommands;
-  
+  private ArrayList<String> availableCommands;
+  private ArrayList<Command> activeCommands;
+  private int commandsSent = 0;
   ArrayList<Player> players;
   
   public boolean started = false;
+  public int currentLevel;
+  
+  Random random = new Random();
   
   public GameServerEngine(GameController theGame) {
     game = theGame;
@@ -43,24 +47,20 @@ public class GameServerEngine {
     if(readyPlayers == players.size()) {
       game.server.sendStartGame();
       this.started = true;
-      this.getNewLevelSetup(1);
+      this.currentLevel = 1;
+      game.server.sendPreparingLevel(currentLevel);
+      this.getNewLevelSetup(currentLevel);
     }
   }
   
   public void getNewLevelSetup(int level) {
     ArrayList<String> levelCommands = new ArrayList<String>(0);
-    ArrayList<String> levelButtons = new ArrayList<String>(0);
     try {
       File levelCommandsFile = new File(getClass().getResource("levelCommands" + level + ".txt").toURI());
-      File levelButtonsFile = new File(getClass().getResource("levelButtons" + level + ".txt").toURI());
       try{
         Scanner input = new Scanner(levelCommandsFile);
         while(input.hasNext()) {
           levelCommands.add(input.nextLine());
-        }
-        input = new Scanner(levelButtonsFile);
-        while(input.hasNext()) {
-          levelButtons.add(input.nextLine());
         }
       }
       catch (FileNotFoundException e) {
@@ -71,18 +71,47 @@ public class GameServerEngine {
       System.out.println("Incorrect URI format");
     }
     
-    Random random = new Random();
-    activeCommands = new ArrayList<String>(0);
+    availableCommands = new ArrayList<String>(0);
     
     for(Player player : players) {
       int [] availableButtons = new int [4];
       for(int i = 4; i < 4; i++){
         int index = random.nextInt(levelCommands.size());
-        activeCommands.add(levelCommands.remove(index));
+        availableCommands.add(levelCommands.remove(index));
         availableButtons[i] = index;
       }
       game.server.sendLevelButtons(player.name, availableButtons);
     }
     
+    game.server.sendStartLevel();
+    for(Player player : players) {
+      this.generateCommand(player.name);
+    }
+  }
+  
+  public void generateCommand(String player) {
+    int commandIndex = random.nextInt(availableCommands.size());
+    activeCommands.add(new Command(player, commandIndex));
+    game.server.sendCommand(player, commandIndex);
+    this.commandsSent++;
+  }
+  
+  public class Command {
+    public String player;
+    public int index;
+    
+    public Command(String thePlayer, int theIndex) {
+      player = thePlayer;
+      index = theIndex;
+    }
+  }
+  
+  public void recievedButton(int ID) {
+    for(int i = 0; i < activeCommands.size(); i++) {
+      if(activeCommands.get(i).index == ID) {
+        Command complete = activeCommands.remove(i);
+        
+      }
+    }
   }
 }

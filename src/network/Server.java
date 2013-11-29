@@ -57,6 +57,27 @@ public class Server implements Runnable {
     serverSender.sendToAll(message);
   }
   
+  public void sendPreparingLevel(int level) {
+    serverSender.sendToAll("LL " + level);
+  }
+  
+  public void sendStartLevel() {
+    serverSender.sendToAll("LS");
+  }
+  
+  public void sendCommand(String player, int index) {
+    serverSender.sendToAll("C " + player + " " + index);
+  }
+  
+  public void sendLevelButtons(String username, int [] buttons) {
+    String message = "B " + username;
+    for(int i = 0; i < buttons.length; i++) {
+      message += " " + buttons[i];
+    }
+    
+    serverSender.sendToAll(message);
+  }
+  
   public void translate(String command, ArrayList<String> values, int clientID) {  
     switch (command) {
       case "U": 
