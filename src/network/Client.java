@@ -47,7 +47,7 @@ public class Client {
     		Player player = new Player(value.get(i), Integer.parseInt(value.get(i + 1)));
     		players.add(player);
     	}
-    	
+    	System.out.println("Client sending to add players");
     	game.addPlayersToWaitingRoom(players);
       break;
     case "P":   // players

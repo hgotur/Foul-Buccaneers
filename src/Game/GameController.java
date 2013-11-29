@@ -13,8 +13,8 @@ public class GameController {
 	protected WaitingScreen waitingRoom;
 	protected JoinGameScreen joinGameScreen;
 	//Networks
-	protected Server theServer;
-	protected Client theClient;
+	protected Server server;
+	protected Client client;
 	//Engine
 	private GameClientEngine clientEngine;
 	private GameServerEngine serverEngine;
@@ -34,9 +34,9 @@ public class GameController {
 	}
 	
 	public void newGame() {
-  	theServer = new Server(serverEngine);
-  	serverEngine = new GameServerEngine(this, theServer);
-    Thread serverThread = new Thread(theServer);
+	  serverEngine = new GameServerEngine(this);
+  	server = new Server(serverEngine);
+    Thread serverThread = new Thread(server);
     serverThread.start();
     
     try {
@@ -49,8 +49,9 @@ public class GameController {
 	
 	public void joinGame(String ipaddress, String username) {
 	  waitingRoom = new WaitingScreen(ipaddress);
-	  theClient = new Client(clientEngine, ipaddress);
-    theClient.sendUsername(username);
+	  clientEngine = new GameClientEngine(this);
+	  client = new Client(clientEngine, ipaddress);
+    client.sendUsername(username);
     
 	}
 }

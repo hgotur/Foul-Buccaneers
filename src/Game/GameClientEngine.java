@@ -5,11 +5,9 @@ import network.Client;
 
 public class GameClientEngine {
 	private GameController game;
-	private Client client;
 	
-	public GameClientEngine(GameController theGame, Client theClient) {
+	public GameClientEngine(GameController theGame) {
 	  game = theGame;
-	  client = theClient;
 	}
 	
 	public void waitingStatus(String [] players, boolean [] isReady) {
@@ -17,6 +15,7 @@ public class GameClientEngine {
 	}
 	
 	public void addPlayersToWaitingRoom(ArrayList<Player> players) {
+	  System.out.println("Adding players to room");
 	  game.waitingRoom.clearWaitingRoom();
 	  int i = 0;
 	  for(Player player : players) {

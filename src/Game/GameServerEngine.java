@@ -6,16 +6,13 @@ import network.*;
 
 public class GameServerEngine {
   private GameController game;
-  private Server server;
   
   ArrayList<Player> players;
   
-  public Boolean started = false;
+  public boolean started = false;
   
-  public GameServerEngine(GameController theGame, Server theServer) {
+  public GameServerEngine(GameController theGame) {
     game = theGame;
-    
-    server = theServer;
     players = new ArrayList<Player>(0);
   }
   
@@ -23,6 +20,6 @@ public class GameServerEngine {
 	  Player player = new Player(playerName);
 	  players.add(player);
 	  
-	  server.sendPlayers(players);
+	  game.server.sendPlayers(players);
   }
 }

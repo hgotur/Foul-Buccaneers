@@ -37,7 +37,7 @@ public class Server implements Runnable {
     }
   }
   
-  public Boolean hasGameStarted() {
+  public boolean hasGameStarted() {
       return game.started;
   }
   
