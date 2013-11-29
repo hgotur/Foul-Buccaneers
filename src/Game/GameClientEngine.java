@@ -11,6 +11,7 @@ import network.Client;
 
 public class GameClientEngine {
 	private GameController game;
+
 	
 	private LevelScreen levelScreen;
 	private ArrayList<String> levelCommands;
@@ -76,17 +77,23 @@ public class GameClientEngine {
 	
 	public void addButtonsToLevel(String username, ArrayList<Integer> buttons) {
 		if (!isUser(username)) return;
+		levelScreen = new LevelScreen(this, curLevel, buttons);
 		for (int i : buttons) {
-			playerButtons.add(levelButtons.get(i));
+			levelScreen.addButton(levelCommands.get(i), i);
 		}
+		
 	}
 	
 	public void levelStart() {
-		levelScreen = new LevelScreen(curLevel, playerButtons);
+		levelScreen.setVisible(true);
 	}
 	
 	public void readCommand(String username, int command) {
 		if (!isUser(username)) return;
 		levelScreen.newCommand(levelCommands.get(command));
+	}
+	
+	public void sendButtonInput(int buttonIndex) {
+		game.client.sendButtonInput(buttonIndex);		
 	}
 }

@@ -93,5 +93,10 @@ public class Client {
     user = "W " + user + " " + status;
     sender.sendString(user);
   }
+  
+  public void sendButtonInput(int buttonIndex) {
+	  String message = "B " + buttonIndex;
+	  sender.sendString(message);
+  }
 
 }

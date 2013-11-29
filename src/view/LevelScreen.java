@@ -14,7 +14,11 @@ import javax.swing.JDialog;
 import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
 
-public class LevelScreen extends JFrame{	
+import Game.*;
+
+public class LevelScreen extends JFrame{
+	private GameClientEngine game;
+	
 	JPanel buttonPanel;
 	JPanel timeInstr;
 	
@@ -22,23 +26,24 @@ public class LevelScreen extends JFrame{
 	JLabel instructions;
 	TitledBorder buttonBorder;
 	
+	ArrayList<JButton> buttons;
+	
 	public LevelScreen(){
 		super("ARRGH");
 	}
 
-	public LevelScreen(int level, ArrayList<String> buttonStrings){
+	public LevelScreen(GameClientEngine theGame, int level, ArrayList<Integer> buttonIndices){
 		super("ARRGH");
+		
+		game = theGame;
+		
 		timer = new JLabel("10 Seconds");
 		buttonBorder = new TitledBorder("Actions");
 		setSize(800,600);
 		setResizable(false);
 		setLayout(new BorderLayout());
 		
-		ArrayList<JButton> buttons = new ArrayList<JButton>(0);
-		for (String buttonString: buttonStrings) {
-			JButton button = new JButton(buttonString);
-			buttons.add(button);
-		}
+		buttons = new ArrayList<JButton>(0);
 		
 		instructions = new JLabel("");
 			
@@ -55,18 +60,27 @@ public class LevelScreen extends JFrame{
 		add(buttonPanel, BorderLayout.SOUTH);
 		add(timeInstr, BorderLayout.NORTH);
 		
-		setVisible(true);
+		setVisible(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
 	public void newCommand(String command) {
 		instructions.setText(command);
 	}
+	
+	public void addButton(String buttonText, int buttonIndex) {
+		JButton button = new JButton(buttonText);
+		button.addActionListener(new ButtonListener(buttonIndex));
+		buttons.add(button);
+	}
 		
-	public class GameListener implements ActionListener{
-		
+	public class ButtonListener implements ActionListener{
+		private int index;
+		public ButtonListener(int buttonIndex) {
+			index = buttonIndex;
+		}
 		public void actionPerformed(ActionEvent e){
-			
+			game.sendButtonInput(index);
 		}
 	}
 	
