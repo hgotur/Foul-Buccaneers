@@ -4,7 +4,7 @@ import Game.*;
 
 public class Client {
   private ClientServerSocket theClient;
-  private GameController game;
+  private GameClientEngine game;
   private Sender sender;
   private Receiver receiver;
 
@@ -36,11 +36,17 @@ public class Client {
   }
   
   public void translate(String command, String [] value) {
-    switch(command) {
-    case "U":   // username
+	char c = command.charAt(0);
+    switch (c) {
+    case 'U':   // username
       break;
-    case "P":   // players
-    case "GS":  // game start
+    case 'P':   // players
+    		// decode value array into players and statuses
+    		String [] players; 
+    		boolean [] statuses;
+    		game.waitingStatus(players, statuses);
+    	break;
+    /*case "GS":  // game start
         break;
     case "GE":  // game end
         break;
@@ -51,7 +57,7 @@ public class Client {
     case "NI":   // new instruction
         break;
     case "NS":   // new score
-        break;
+        break;*/
     
     }
   }

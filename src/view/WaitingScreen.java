@@ -18,18 +18,11 @@ import javax.swing.JDialog;
 
 public class WaitingScreen extends JFrame{
 	
-	boolean pOneReady;
-	boolean pTwoReady;
-	boolean pThreeReady;
-	String playerOne;
-	String playerTwo;
-	String playerThree;
 	String IPaddress;
-	JLabel [] players;
-	JLabel [] statuses;
-	JLabel pOneStatus;
-	JLabel pTwoStatus;
-	JLabel pThreeStatus;
+	
+	JLabel [] playerLabels;
+	JLabel [] statusLabels;
+	
 	JLabel IPaddr;
 	JButton startGame;
 	JCheckBox ready;
@@ -44,18 +37,18 @@ public class WaitingScreen extends JFrame{
 		super("Game Lobby");
 		IPaddress = addr;		
 		setLayout(new BorderLayout());
-		players = new JLabel[4];
-		statuses = new JLabel[4];
+		playerLabels = new JLabel[4];
+		statusLabels = new JLabel[4];
 		
 		status = new JPanel(new GridLayout(4,1,0,10));
 		IPaddr = new JLabel("IP Address of this server: "+IPaddress,SwingConstants.CENTER);
 		IPaddr.setForeground(Color.BLUE);
 		status.add(IPaddr);
-		for (int i = 0; i < players.length; i++) {
-		    players[i] = new JLabel("");
-		    statuses[i] = new JLabel("");
-		    status.add(players[i]);
-		    status.add(statuses[i]);
+		for (int i = 0; i < playerLabels.length; i++) {
+			playerLabels[i] = new JLabel("");
+			statusLabels[i] = new JLabel("");
+		    status.add(playerLabels[i]);
+		    status.add(statusLabels[i]);
 		}
 		listen = new WaitingListener();
 		
@@ -82,22 +75,7 @@ public class WaitingScreen extends JFrame{
 	
 	public class ReadyListener implements ItemListener {
 		public void itemStateChanged(ItemEvent e){
-			if(pOneReady == false){
-				pOneReady = true;
-				pOneStatus.setText(playerOne+" is Aboard!");
-				System.out.println(pOneReady);
-			}
-			else{
-				pOneReady = false;
-				pOneStatus.setText(playerOne+" is not Aboard");
-			}
-			if(pOneReady == true && pTwoReady == true && pThreeReady == true){
-				startGame.setEnabled(true);
-			}
-			else{
-				startGame.setEnabled(false);
-			}
-			
+			//send message to server
 		}
 	}
 	
@@ -113,16 +91,28 @@ public class WaitingScreen extends JFrame{
 	}
 	
 	public void addPlayer(String username, int playerPosition) {
-	  players[playerPosition].setText(username);
-	  statuses[playerPosition].setText("is not Aboard!");
+		playerLabels[playerPosition].setText(username);
+		statusLabels[playerPosition].setText("is not Aboard!");
 	}
 	
 	public void changeStatus(int playerPosition, Boolean status) {
 	  if(status) {
-	    statuses[playerPosition].setText("is Aboard!");
+		  statusLabels[playerPosition].setText("is Aboard!");
 	  }
 	  else {
-	    statuses[playerPosition].setText("is not Aboard!");
+		  statusLabels[playerPosition].setText("is not Aboard!");
 	  }
+	}
+	
+	public void waitingStatus(String [] waitingPlayers, boolean [] isReady) {
+		for (int i = 0; i < waitingPlayers.length; i++) {
+			playerLabels[i].setText(waitingPlayers[i]);
+			if (isReady[i] == true) {
+				statusLabels[i].setText("is aboard!");
+			}
+			else {
+				statusLabels[i].setText("is not aboard!");
+			}
+		}
 	}
 }
