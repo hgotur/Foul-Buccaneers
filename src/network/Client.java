@@ -39,14 +39,20 @@ public class Client {
     case "GS":  // game start
       game.letsGetStarted();
       break;
+    case "LL":	//level load
+    	game.getNewLevelSetup(Integer.parseInt(value.get(0)));
+    	break;
     case "B":	// buttons
     	ArrayList<Integer> buttons = new ArrayList<Integer>(0);
     	for (String button: value) {
     		buttons.add(Integer.parseInt(button));
     	}
     	game.addButtonsToLevel(buttons);
-    case "LS":	//level start
-    	//display screen
+    	break;
+    case "LS":	// level start
+    	game.levelStart();
+    	// display screen
+    	break;
     /*case "GE":  // game end
         break;
     case "LS":  // level start
