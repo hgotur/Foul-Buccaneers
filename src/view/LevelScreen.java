@@ -75,7 +75,7 @@ public class LevelScreen extends JFrame{
 	public void newCommand(String command) {
 		instructions.setText(command);
 		timer.stop();
-		timer.restart();
+		timer = new Timer(1000, new TimerListener());
 		
 	}
 	
@@ -97,7 +97,7 @@ public class LevelScreen extends JFrame{
 	}
 	
 	public class TimerListener implements ActionListener {
-		private int elapsedSeconds = 30;
+		private int elapsedSeconds = 10;
 	    public void actionPerformed(ActionEvent evt){
 	        elapsedSeconds--;
 	        timerLabel.setText("" + elapsedSeconds);
