@@ -8,4 +8,9 @@ public class Player {
 		  name = playerName;
 		  status = 0;
 	  }
+	  
+	  public Player (String playerName, int playerStatus) {
+		  name = playerName;
+		  status = playerStatus;
+	  }
 }

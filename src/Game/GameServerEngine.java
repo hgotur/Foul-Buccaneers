@@ -23,9 +23,6 @@ public class GameServerEngine {
 	  Player player = new Player(playerName);
 	  players.add(player);
 	  
-	  
-	  // send message to all clients
 	  server.sendPlayers(players);
-    //game.waitingRoom.addPlayer(playerName, playerPosition);
   }
 }

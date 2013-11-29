@@ -1,5 +1,8 @@
 package network;
 import static java.lang.System.out;
+
+import java.util.ArrayList;
+
 import Game.*;
 
 public class Client {
@@ -9,7 +12,7 @@ public class Client {
   private Receiver receiver;
 
   public Client(GameClientEngine theGame, String ipAddr) {
-	  game = theGame;
+	game = theGame;
     theClient = new ClientServerSocket(ipAddr, 45001);
     theClient.startClient();
       
@@ -37,13 +40,17 @@ public class Client {
   
   public void translate(String command, String [] value) {
     switch (command) {
-    case "U":   // username
+    case "U":   // list of users + statuses
+    	ArrayList<Player> players = new ArrayList<Player>(0);
+    	
+    	for (int i = 0; i < value.length; i+=2) {
+    		Player player = new Player(value[i], Integer.parseInt(value[i + 1]));
+    		players.add(player);
+    	}
+    	
+    	game.addPlayersToWaitingRoom(players);
       break;
     case "P":   // players
-    		// decode value array into players and statuses
-    		String [] players; 
-    		boolean [] statuses;
-    		game.waitingStatus(players, statuses);
     	break;
     /*case "GS":  // game start
         break;
