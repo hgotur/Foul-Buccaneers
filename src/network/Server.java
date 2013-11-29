@@ -44,7 +44,8 @@ public class Server implements Runnable {
   public void sendPlayers(ArrayList<Player> players) {
 	  String message =  "U";
 	  
-	  for (Player player: players) {
+	  for (Player player : players) {
+	    System.out.println("Sending " + player.name + " " + player.status);
 		  message += (" " + player.name + " " + player.status);
 	  }
 	  
@@ -56,6 +57,8 @@ public class Server implements Runnable {
       case "U": 
         game.addPlayer(values.get(0), Integer.parseInt(values.get(1)));
         break;
+      case "W":
+        game.waitingStateChange(values.get(0), Integer.parseInt(values.get(1)));
       default:
         assert false;
       

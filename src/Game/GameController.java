@@ -59,6 +59,6 @@ public class GameController {
 	
 	public void updatePlayerStatus(int status) {
 	  player.status = status;
-	  client.sendUsername(player.name, status);
+	  client.sendWaitingStateChange(player.name, status);
 	}
 }

@@ -19,7 +19,16 @@ public class GameServerEngine {
   public void addPlayer(String playerName, int status) {
 	  Player player = new Player(playerName, status);
 	  players.add(player);
-	  
+
 	  game.server.sendPlayers(players);
+  }
+  
+  public void waitingStateChange(String playerName, int status) {
+    for(Player player : players) {
+      if(player.name.equals(playerName)) {
+        player.status = status;
+      }
+    }
+    game.server.sendPlayers(players);
   }
 }

@@ -22,22 +22,6 @@ public class Client {
     clientReceiver.start();
   }
   
-  public void sendUsername(String user, int status) {
-    user = "U " + user + " " + status;
-    out.println("Sending String");
-    sender.sendString(user);
-  }
-  
-  public String encode(String [] args) {
-      String message = "";
-      
-      for(String arg : args) {
-          message += (" " + arg);
-      }
-      
-      return message;
-  }
-  
   public void translate(String command, ArrayList<String> value) {
     switch (command) {
     case "U":   // list of users + statuses
@@ -66,6 +50,27 @@ public class Client {
         break;*/
     
     }
+  }
+  
+  public void sendUsername(String user, int status) {
+    user = "U " + user + " " + status;
+    out.println("Sending String");
+    sender.sendString(user);
+  }
+  
+  public String encode(String [] args) {
+      String message = "";
+      
+      for(String arg : args) {
+          message += (" " + arg);
+      }
+      
+      return message;
+  }
+  
+  public void sendWaitingStateChange(String user, int status) {
+    user = "W " + user + " " + status;
+    sender.sendString(user);
   }
 
 }
