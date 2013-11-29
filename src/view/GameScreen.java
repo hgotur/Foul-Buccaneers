@@ -32,16 +32,14 @@ public class GameScreen extends JFrame{
 	public GameScreen(){
 		super("ARRGH");
 	}
+	
 	public GameScreen(int level){
-		
 		super("ARRGH");
 		timer = new JLabel("10 Seconds");
 		buttonBorder = new TitledBorder("Actions");
 		setSize(800,600);
 		setResizable(false);
 		setLayout(new BorderLayout());
-		
-		
 		
 		if(level == 1){
 			
