@@ -24,6 +24,7 @@ public class GameServerEngine {
   public GameServerEngine(GameController theGame) {
     game = theGame;
     players = new ArrayList<Player>(0);
+    activeCommands = new ArrayList<Command>(0);
   }
   
   public void addPlayer(String playerName, int status) {
