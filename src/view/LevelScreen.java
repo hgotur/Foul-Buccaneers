@@ -32,13 +32,8 @@ public class LevelScreen extends JFrame{
 	public LevelScreen(){
 		super("ARRGH");
 	}
-<<<<<<< HEAD:src/view/GameScreen.java
-	
-	public GameScreen(int level){
-=======
+
 	public LevelScreen(int level){
-		
->>>>>>> in middle of client loading level:src/view/LevelScreen.java
 		super("ARRGH");
 		timer = new JLabel("10 Seconds");
 		buttonBorder = new TitledBorder("Actions");
