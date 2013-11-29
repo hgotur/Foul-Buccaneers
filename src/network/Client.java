@@ -16,7 +16,7 @@ public class Client {
     theClient = new ClientServerSocket(ipAddr, 45001);
     theClient.startClient();
       
-    receiver = new Receiver(theClient);
+    receiver = new Receiver(this, theClient);
     sender = new Sender(theClient);
     Thread clientReceiver = new Thread(receiver);
     clientReceiver.start();
@@ -38,13 +38,13 @@ public class Client {
       return message;
   }
   
-  public void translate(String command, String [] value) {
+  public void translate(String command, ArrayList<String> value) {
     switch (command) {
     case "U":   // list of users + statuses
     	ArrayList<Player> players = new ArrayList<Player>(0);
     	
-    	for (int i = 0; i < value.length; i+=2) {
-    		Player player = new Player(value[i], Integer.parseInt(value[i + 1]));
+    	for (int i = 0; i < value.size(); i+=2) {
+    		Player player = new Player(value.get(i), Integer.parseInt(value.get(i + 1)));
     		players.add(player);
     	}
     	
