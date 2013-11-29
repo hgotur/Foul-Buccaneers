@@ -72,13 +72,19 @@ public class GameServerEngine {
     }
     
     availableCommands = new ArrayList<String>(0);
+    ArrayList<Integer> commandIndexes = new ArrayList<Integer>(levelCommands.size());
+    
+    for(int i = 0; i < levelCommands.size(); i++) {
+      commandIndexes.add(i);
+    }
     
     for(Player player : players) {
       int [] availableButtons = new int [4];
       for(int i = 0; i < 4; i++){
-        int index = random.nextInt(levelCommands.size());
-        availableCommands.add(levelCommands.remove(index));
-        availableButtons[i] = index;
+        int index = random.nextInt(commandIndexes.size());
+        int commandIndex = commandIndexes.remove(index);
+        availableCommands.add(levelCommands.get(commandIndex));
+        availableButtons[i] = commandIndex;
       }
       game.server.sendLevelButtons(player.name, availableButtons);
     }
