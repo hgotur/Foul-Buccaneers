@@ -23,4 +23,8 @@ public class GameClientEngine {
 	    i++;
 	  }
 	}
+	
+	public void letsGetStarted() {
+	  game.letsGetStarted();
+	}
 }

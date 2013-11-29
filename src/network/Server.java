@@ -52,6 +52,11 @@ public class Server implements Runnable {
 	  serverSender.sendToAll(message);
   }
   
+  public void sendStartGame() {
+    String message = "GS";
+    serverSender.sendToAll(message);
+  }
+  
   public void translate(String command, ArrayList<String> values, int clientID) {  
     switch (command) {
       case "U": 

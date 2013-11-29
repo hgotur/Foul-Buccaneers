@@ -24,11 +24,19 @@ public class GameServerEngine {
   }
   
   public void waitingStateChange(String playerName, int status) {
+    int readyPlayers = 0;
     for(Player player : players) {
       if(player.name.equals(playerName)) {
         player.status = status;
       }
+      if(player.status == 1) {
+        readyPlayers++;
+      }
     }
     game.server.sendPlayers(players);
+    if(readyPlayers == players.size()) {
+      game.server.sendStartGame();
+      this.started = true;
+    }
   }
 }

@@ -36,9 +36,10 @@ public class Client {
       break;
     case "P":   // players
     	break;
-    /*case "GS":  // game start
-        break;
-    case "GE":  // game end
+    case "GS":  // game start
+      game.letsGetStarted();
+      break;
+    /*case "GE":  // game end
         break;
     case "LS":  // level start
         break;

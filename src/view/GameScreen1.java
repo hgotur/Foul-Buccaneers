@@ -31,7 +31,6 @@ public class GameScreen1 extends JFrame{
 	
 	public GameScreen1(){
 		super("ARRGH");
-		
 	}
 	public GameScreen1(int level){
 		

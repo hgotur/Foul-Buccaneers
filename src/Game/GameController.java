@@ -6,7 +6,6 @@ import java.net.UnknownHostException;
 import view.*;
 import network.*;
 
-
 public class GameController {
 	//Views
   protected StartServerScreen serverScreen;
@@ -60,5 +59,10 @@ public class GameController {
 	public void updatePlayerStatus(int status) {
 	  player.status = status;
 	  client.sendWaitingStateChange(player.name, status);
+	}
+	
+	public void letsGetStarted() {
+	  waitingRoom.setVisible(false);
+	  GameScreen1 screen = new GameScreen1(1);
 	}
 }

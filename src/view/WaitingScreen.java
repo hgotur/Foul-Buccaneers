@@ -33,7 +33,6 @@ public class WaitingScreen extends JFrame{
 	JPanel status;
 	JPanel GetReady;
 	WaitingListener listen;
-	GameScreen1 theGameScreen;
 	
 	
 	public WaitingScreen(GameController theGame, String addr){
@@ -95,7 +94,6 @@ public class WaitingScreen extends JFrame{
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource() == startGame){
 				setVisible(false);
-				theGameScreen = new GameScreen1(1);
 			}
 		}
 		
