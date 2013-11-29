@@ -78,6 +78,10 @@ public class Server implements Runnable {
     serverSender.sendToAll(message);
   }
   
+  public void sendCommandComplete(String player, int index) {
+    serverSender.sendToAll("CC " + player + " " + index);
+  }
+  
   public void translate(String command, ArrayList<String> values, int clientID) {  
     switch (command) {
       case "U": 
@@ -85,6 +89,10 @@ public class Server implements Runnable {
         break;
       case "W":
         game.waitingStateChange(values.get(0), Integer.parseInt(values.get(1)));
+        break;
+      case "B":
+        game.recievedButton(Integer.parseInt(values.get(0)));
+        break;
       default:
         assert false;
       

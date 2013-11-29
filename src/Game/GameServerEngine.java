@@ -101,6 +101,9 @@ public class GameServerEngine {
     activeCommands.add(new Command(player, commandIndex));
     game.server.sendCommand(player, commandIndex);
     this.commandsSent++;
+    if(this.commandsSent > 20) {
+      //Level ends and we move on.
+    }
   }
   
   public class Command {
@@ -117,7 +120,8 @@ public class GameServerEngine {
     for(int i = 0; i < activeCommands.size(); i++) {
       if(activeCommands.get(i).index == ID) {
         Command complete = activeCommands.remove(i);
-        
+        game.server.sendCommandComplete(complete.player, complete.index);
+        this.generateCommand(complete.player);
       }
     }
   }
