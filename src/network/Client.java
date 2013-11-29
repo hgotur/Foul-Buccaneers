@@ -23,6 +23,7 @@ public class Client {
   }
   
   public void translate(String command, ArrayList<String> value) {
+	String username;
     switch (command) {
     case "U":   // list of users + statuses
     	ArrayList<Player> players = new ArrayList<Player>(0);
@@ -44,7 +45,7 @@ public class Client {
     	break;
     case "B":	// buttons
     	ArrayList<Integer> buttons = new ArrayList<Integer>(0);
-    	String username = value.remove(0);
+    	username = value.remove(0);
     	for (String button: value) {
     		buttons.add(Integer.parseInt(button));
     	}
@@ -53,6 +54,10 @@ public class Client {
     case "LS":	// level start
     	game.levelStart();
     	// display screen
+    	break;
+    case "C":	// receive command
+    	username = value.get(0);
+    	game.readCommand(username, value.get(1));
     	break;
     /*case "GE":  // game end
         break;

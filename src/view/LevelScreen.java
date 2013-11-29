@@ -58,6 +58,10 @@ public class LevelScreen extends JFrame{
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
+	
+	public void newCommand(String command) {
+		instructions.setText(command);
+	}
 		
 	public class GameListener implements ActionListener{
 		
