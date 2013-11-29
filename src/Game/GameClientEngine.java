@@ -27,4 +27,8 @@ public class GameClientEngine {
 	public void letsGetStarted() {
 	  game.letsGetStarted();
 	}
+	
+	public void addButtonsToLevel(ArrayList<Integer> buttons) {
+		
+	}
 }

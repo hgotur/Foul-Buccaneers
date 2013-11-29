@@ -63,6 +63,6 @@ public class GameController {
 	
 	public void letsGetStarted() {
 	  waitingRoom.setVisible(false);
-	  GameScreen screen = new GameScreen(1);
+	  GameStartScreen screen = new GameStartScreen();
 	}
 }
