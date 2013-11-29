@@ -16,8 +16,8 @@ public class GameServerEngine {
     players = new ArrayList<Player>(0);
   }
   
-  public void addPlayer(String playerName, int playerPosition) {
-	  Player player = new Player(playerName);
+  public void addPlayer(String playerName, int status) {
+	  Player player = new Player(playerName, status);
 	  players.add(player);
 	  
 	  game.server.sendPlayers(players);

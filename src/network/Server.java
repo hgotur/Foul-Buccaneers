@@ -54,7 +54,7 @@ public class Server implements Runnable {
   public void translate(String command, ArrayList<String> values, int clientID) {  
     switch (command) {
       case "U": 
-        game.addPlayer(values.get(0), clientID);
+        game.addPlayer(values.get(0), Integer.parseInt(values.get(1)));
         break;
       default:
         assert false;
