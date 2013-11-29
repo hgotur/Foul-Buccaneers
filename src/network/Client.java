@@ -8,7 +8,7 @@ public class Client {
   private Sender sender;
   private Receiver receiver;
 
-  public Client(GameController theGame, String ipAddr) {
+  public Client(GameClientEngine theGame, String ipAddr) {
 	  game = theGame;
     theClient = new ClientServerSocket(ipAddr, 45001);
     theClient.startClient();
@@ -36,11 +36,10 @@ public class Client {
   }
   
   public void translate(String command, String [] value) {
-	char c = command.charAt(0);
-    switch (c) {
-    case 'U':   // username
+    switch (command) {
+    case "U":   // username
       break;
-    case 'P':   // players
+    case "P":   // players
     		// decode value array into players and statuses
     		String [] players; 
     		boolean [] statuses;

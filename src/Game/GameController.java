@@ -49,7 +49,7 @@ public class GameController {
 	
 	public void joinGame(String ipaddress, String username) {
 	  waitingRoom = new WaitingScreen(ipaddress);
-	  theClient = new Client(this, ipaddress);
+	  theClient = new Client(clientEngine, ipaddress);
     theClient.sendUsername(username);
     
 	}
