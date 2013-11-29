@@ -32,7 +32,7 @@ public class LevelScreen extends JFrame{
 		super("ARRGH");
 	}
 
-	public LevelScreen(GameClientEngine theGame, int level, ArrayList<Integer> buttonIndices){
+	public LevelScreen(GameClientEngine theGame, int level, int numButtons){
 		super("ARRGH");
 		
 		game = theGame;
@@ -44,6 +44,9 @@ public class LevelScreen extends JFrame{
 		setLayout(new BorderLayout());
 		
 		buttons = new ArrayList<JButton>(0);
+		for(int i = 0; i < 4; i++) {
+		  buttons.add(new JButton(""));
+		}
 		
 		instructions = new JLabel("");
 			
@@ -68,10 +71,11 @@ public class LevelScreen extends JFrame{
 		instructions.setText(command);
 	}
 	
-	public void addButton(String buttonText, int buttonIndex) {
-		JButton button = new JButton(buttonText);
-		button.addActionListener(new ButtonListener(buttonIndex));
-		buttons.add(button);
+	public void addButtons(ArrayList<String> buttonText, ArrayList<Integer> buttonIndex) {
+	  for(JButton button : buttons) {
+  	  button.setText(buttonText.remove(0));
+  	  button.addActionListener(new ButtonListener(buttonIndex.remove(0)));
+	  }
 	}
 		
 	public class ButtonListener implements ActionListener{
