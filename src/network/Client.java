@@ -44,10 +44,11 @@ public class Client {
     	break;
     case "B":	// buttons
     	ArrayList<Integer> buttons = new ArrayList<Integer>(0);
+    	String username = value.remove(0);
     	for (String button: value) {
     		buttons.add(Integer.parseInt(button));
     	}
-    	game.addButtonsToLevel(buttons);
+    	game.addButtonsToLevel(username, buttons);
     	break;
     case "LS":	// level start
     	game.levelStart();

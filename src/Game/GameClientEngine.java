@@ -67,7 +67,15 @@ public class GameClientEngine {
 	    }
 	}
 	
-	public void addButtonsToLevel(ArrayList<Integer> buttons) {
+	public boolean isUser(String username) {
+		if (game.player.name.equals(username)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void addButtonsToLevel(String username, ArrayList<Integer> buttons) {
+		if (!isUser(username)) return;
 		for (int i : buttons) {
 			playerButtons.add(levelButtons.get(i));
 		}
