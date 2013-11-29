@@ -22,8 +22,8 @@ public class Client {
     clientReceiver.start();
   }
   
-  public void sendUsername(String user) {
-    user = "U " + user;
+  public void sendUsername(String user, int status) {
+    user = "U " + user + " " + status;
     out.println("Sending String");
     sender.sendString(user);
   }

@@ -16,8 +16,12 @@ import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
 import javax.swing.JDialog;
 
+import Game.GameController;
+
 public class WaitingScreen extends JFrame{
 	
+  GameController game;
+  
 	String IPaddress;
 	
 	JLabel [] playerLabels;
@@ -29,12 +33,14 @@ public class WaitingScreen extends JFrame{
 	JPanel status;
 	JPanel GetReady;
 	WaitingListener listen;
-	GameScreen1 game;
+	GameScreen1 theGameScreen;
 	
 	
-	public WaitingScreen(String addr){
-		
+	public WaitingScreen(GameController theGame, String addr){
 		super("Game Lobby");
+		
+		game = theGame;
+		
 		IPaddress = addr;		
 		setLayout(new BorderLayout());
 		playerLabels = new JLabel[4];
@@ -75,7 +81,12 @@ public class WaitingScreen extends JFrame{
 	
 	public class ReadyListener implements ItemListener {
 		public void itemStateChanged(ItemEvent e){
-			//send message to server
+		  if(e.getStateChange() == ItemEvent.SELECTED) {
+		    game.updatePlayerStatus(1);
+		  }
+		  else {
+		    game.updatePlayerStatus(0);
+		  }
 		}
 	}
 	
@@ -84,24 +95,20 @@ public class WaitingScreen extends JFrame{
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource() == startGame){
 				setVisible(false);
-				game = new GameScreen1(1);
+				theGameScreen = new GameScreen1(1);
 			}
 		}
 		
 	}
 	
-	public void addPlayer(String username, int playerPosition) {
+	public void addPlayer(String username, int status, int playerPosition) {
 		playerLabels[playerPosition].setText(username);
-		statusLabels[playerPosition].setText("is not Aboard!");
-	}
-	
-	public void changeStatus(int playerPosition, Boolean status) {
-	  if(status) {
+		if(status > 0) {
 		  statusLabels[playerPosition].setText("is Aboard!");
-	  }
-	  else {
+		}
+		else {
 		  statusLabels[playerPosition].setText("is not Aboard!");
-	  }
+		}
 	}
 	
 	public void waitingStatus(String [] waitingPlayers, boolean [] isReady) {

@@ -19,6 +19,8 @@ public class GameController {
 	private GameClientEngine clientEngine;
 	private GameServerEngine serverEngine;
 	
+	public Player player;
+	
 	// Load the whats it called
 	public void start() {
 		SplashScreen screen1;
@@ -48,10 +50,15 @@ public class GameController {
 	}
 	
 	public void joinGame(String ipaddress, String username) {
-	  waitingRoom = new WaitingScreen(ipaddress);
+	  waitingRoom = new WaitingScreen(this, ipaddress);
 	  clientEngine = new GameClientEngine(this);
 	  client = new Client(clientEngine, ipaddress);
-    client.sendUsername(username);
-    
+	  player = new Player(username, 0);
+    client.sendUsername(username, 0);
+	}
+	
+	public void updatePlayerStatus(int status) {
+	  player.status = status;
+	  client.sendUsername(player.name, status);
 	}
 }
