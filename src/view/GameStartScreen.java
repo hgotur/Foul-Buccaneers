@@ -14,7 +14,7 @@ public class GameStartScreen extends JFrame {
 		
 		setLayout(new FlowLayout());
 		
-		JLabel background = new JLabel(new ImageIcon(getClass().getResource("/view/images/ocean.jpeg")));
+		JLabel background = new JLabel(new ImageIcon(getClass().getResource("/view/images/splash.png")));
 		
 		add(background);
 		

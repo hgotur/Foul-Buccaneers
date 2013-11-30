@@ -2,10 +2,16 @@ package view;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -43,9 +49,8 @@ public class LevelScreen extends JFrame{
 		
 		timerLabel = new JLabel("");
 		buttonBorder = new TitledBorder("Actions");
-		setSize(800,600);
 		setResizable(false);
-		setLayout(new BorderLayout());
+		setLayout(new GridBagLayout());
 		
 		buttons = new ArrayList<JButton>(0);
 		for(int i = 0; i < 4; i++) {
@@ -60,17 +65,56 @@ public class LevelScreen extends JFrame{
 			buttonPanel.add(button);
 		}
 		buttonPanel.setBorder(buttonBorder);
-		
-		timeInstr = new JPanel(new GridLayout(1,2,10,0));
-		timeInstr.add(timerLabel);
-		timeInstr.add(instructions);
-		timeInstr.add(shipDamage);
+		buttonPanel.setPreferredSize(new Dimension(700, 500));
 		
 		timer = new Timer(1000, new TimerListener());
 		
-		add(buttonPanel, BorderLayout.SOUTH);
-		add(timeInstr, BorderLayout.NORTH);
+		JPanel timerPanel = new JPanel();
+		timerPanel.setLayout(new BoxLayout(timerPanel, BoxLayout.PAGE_AXIS));
+		timerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		timerPanel.add(new JButton("Image goes here"));
+		timerPanel.add(timerLabel);
+		timerPanel.setPreferredSize(new Dimension(210, 150));
 		
+		JPanel commandPanel = new JPanel(new FlowLayout());
+		commandPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		commandPanel.add(instructions);
+		commandPanel.setPreferredSize(new Dimension(420, 150));
+		
+		JPanel damagePanel = new JPanel();
+		damagePanel.setLayout(new BoxLayout(damagePanel, BoxLayout.PAGE_AXIS));
+		damagePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		damagePanel.add(new JButton("Image goes here."));
+		damagePanel.add(shipDamage);
+		damagePanel.setPreferredSize(new Dimension(210, 150));
+		
+		timeInstr = new JPanel(new GridBagLayout());
+		timeInstr.setPreferredSize(new Dimension(850, 100));
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 0;
+		add(timerPanel, c);
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+    c.gridx = 1;
+    c.gridy = 0;
+		add(commandPanel, c);
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+    c.gridx = 2;
+    c.gridy = 0;
+		add(damagePanel, c);		
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+    c.gridx = 0;
+    c.gridy = 1;
+    c.gridheight = 2;
+    c.gridwidth = 3;
+		add(buttonPanel, c);
+		
+		setSize(850,700);
 		setVisible(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
