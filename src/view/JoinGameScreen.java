@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
+import javax.swing.border.EmptyBorder;
 
 import Game.*;
 
@@ -30,9 +32,10 @@ public class JoinGameScreen extends JFrame{
 	public JoinGameScreen(GameController thegame){
 		super("Enter IP Adress");
 		game = thegame;
+		
 		setLayout(new BorderLayout());
-		setSize(800,600);
 		enter = new JButton("Enter");
+		enter.setFont(new Font("serif", Font.PLAIN, 20));
 		enterUsername = new JLabel("Enter Your Username");
 		enterIP = new JLabel("Enter IP Adress of target Server");
 		ip = new JTextField();
@@ -41,19 +44,18 @@ public class JoinGameScreen extends JFrame{
 		enter.addActionListener(listen);
 		
 		field1 = new JPanel(new GridLayout(2,2,10,10));
-		
-		
 		field1.add(enterIP);
 		field1.add(ip);
 		field1.add(enterUsername);
 		field1.add(username);
+		field1.setBorder(new EmptyBorder(10,10,10,10));
 		add(field1, BorderLayout.NORTH);
 		add(enter, BorderLayout.SOUTH);
 		
+		setSize(400,150);
+    setLocation(200, 200);
 		setVisible(true);
 		setResizable(false);
-		
-		
 	}
 	
 	public String getUsername(){

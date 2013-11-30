@@ -41,7 +41,7 @@ public class SplashScreen extends JFrame {
 		setLayout(new BorderLayout());
 		listen = new SplashScreenListener(game);
 		
-		background = new JLabel(new ImageIcon(getClass().getResource("/view/images/ocean.jpeg")));
+		background = new JLabel(new ImageIcon(getClass().getResource("/view/images/splash.png")));
 		joinGame = new JButton("Join Game");
 		joinGame.setFont(new Font("Serif", Font.PLAIN, 30));
 		newGame = new JButton("New Game");
@@ -57,7 +57,7 @@ public class SplashScreen extends JFrame {
 		newGame.addActionListener(listen);
 		joinGame.addActionListener(listen);
 		
-		setSize(800,600);
+		setSize(850,700);
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -77,13 +77,11 @@ public class SplashScreen extends JFrame {
 			if(e.getSource() == joinGame){
 				System.out.println("Join Game Pressed");
 				joinGamepressed = true;
-				setVisible(false);
 				game.getJoinGameInfo();
 			}
 			if(e.getSource() == newGame){
 				System.out.println("New Game Pressed");
 				newGamepressed = true;
-				setVisible(false);
 				game.getNewGameInfo();
 			}
 			

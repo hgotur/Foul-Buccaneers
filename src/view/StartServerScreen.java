@@ -5,6 +5,7 @@ import Game.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Color;
 
@@ -14,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
+import javax.swing.border.EmptyBorder;
 
 public class StartServerScreen extends JFrame {
 	
@@ -38,10 +40,10 @@ public class StartServerScreen extends JFrame {
 		
 		super("Start New Game");
 		setLayout(new BorderLayout());
-		setSize(400,200);
 		setResizable(false);
 		usernameField = new JTextField(50);
 		enter = new JButton("Start Server");
+		enter.setFont(new Font("serif", Font.PLAIN, 20));
 		enterUsername = new JLabel("Enter Username");
 		serv = new JPanel(new GridLayout(1,2,10,10));
 		
@@ -49,13 +51,15 @@ public class StartServerScreen extends JFrame {
 		
 		serv.add(enterUsername);
 		serv.add(usernameField);
+		serv.setBorder(new EmptyBorder(10,10,10,10));
 		
 		add(serv, BorderLayout.NORTH);
 		add(enter, BorderLayout.SOUTH);
 		
-		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(400,100);
+    setLocation(200, 200);
 		
+		setVisible(true);
 	}
 	
 	public String getUsername(){

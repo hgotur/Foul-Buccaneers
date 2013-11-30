@@ -8,6 +8,7 @@ import network.*;
 
 public class GameController {
 	//Views
+  protected SplashScreen splashScreen;
   protected StartServerScreen serverScreen;
 	protected WaitingScreen waitingRoom;
 	protected JoinGameScreen joinGameScreen;
@@ -24,8 +25,7 @@ public class GameController {
 	
 	// Load the whats it called
 	public void start() {
-		SplashScreen screen1;
-		screen1 = new SplashScreen(this);
+		splashScreen = new SplashScreen(this);
 	}
 	
 	public void getNewGameInfo() {
@@ -51,6 +51,7 @@ public class GameController {
 	}
 	
 	public void joinGame(String ipaddress, String username) {
+	  splashScreen.setVisible(false);
 	  waitingRoom = new WaitingScreen(this, ipaddress);
 	  clientEngine = new GameClientEngine(this);
 	  client = new Client(clientEngine, ipaddress);
