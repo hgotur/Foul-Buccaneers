@@ -24,6 +24,7 @@ public class LevelScreen extends JFrame{
 	JPanel timeInstr;
 	
 	JLabel timerLabel;
+	JLabel shipDamage;
 	JLabel instructions;
 	TitledBorder buttonBorder;
 	
@@ -52,6 +53,7 @@ public class LevelScreen extends JFrame{
 		}
 		
 		instructions = new JLabel("");
+		shipDamage = new JLabel("10");
 			
 		buttonPanel = new JPanel(new GridLayout(2,2,10,10));
 		for (JButton button: buttons) {
@@ -62,6 +64,7 @@ public class LevelScreen extends JFrame{
 		timeInstr = new JPanel(new GridLayout(1,2,10,0));
 		timeInstr.add(timerLabel);
 		timeInstr.add(instructions);
+		timeInstr.add(shipDamage);
 		
 		timer = new Timer(1000, new TimerListener());
 		
@@ -79,6 +82,10 @@ public class LevelScreen extends JFrame{
 		timerLabel.setText("" + 10);
 		timer.start();
 		
+	}
+	
+	public void setShipDamage(int newDamage) {
+		shipDamage.setText("" + newDamage);
 	}
 	
 	public void addButtons(ArrayList<String> buttonText, ArrayList<Integer> buttonIndex) {
