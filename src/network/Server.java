@@ -106,6 +106,9 @@ public class Server implements Runnable {
       case "B":
         game.recievedButton(Integer.parseInt(values.get(0)));
         break;
+      case "F":
+        game.commandFailed(Integer.parseInt(values.get(0)));
+        break;
       default:
         assert false;
       
