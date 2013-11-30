@@ -23,7 +23,7 @@ public class Server implements Runnable {
 
   public void run() {
     try {
-      ServerSocket serverSocket = new ServerSocket(45001);
+      ServerSocket serverSocket = new ServerSocket(GameController.PORT);
       
       serverAcceptThread = new Thread(new ServerAcceptThread(this, serverSocket));
       serverAcceptThread.start();

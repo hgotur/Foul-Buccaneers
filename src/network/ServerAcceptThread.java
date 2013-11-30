@@ -2,6 +2,8 @@ package network;
 
 import java.net.ServerSocket;
 
+import Game.GameController;
+
 public class ServerAcceptThread implements Runnable {
   
   private Server server;
@@ -17,7 +19,7 @@ public class ServerAcceptThread implements Runnable {
     while (true) {
   	  // break out when game starts
   	  if (server.sockets.size() < 4) {
-  		  ClientServerSocket clientServerSocket = new ClientServerSocket("127.0.0.1", 45001);
+  		  ClientServerSocket clientServerSocket = new ClientServerSocket("127.0.0.1", GameController.PORT);
     	  clientServerSocket.startServer(serverSocket);
     	  if(!server.hasGameStarted()) {
     	    server.sockets.add(clientServerSocket);

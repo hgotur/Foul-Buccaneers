@@ -13,7 +13,7 @@ public class Client {
 
   public Client(GameClientEngine theGame, String ipAddr) {
 	game = theGame;
-    theClient = new ClientServerSocket(ipAddr, 45001);
+    theClient = new ClientServerSocket(ipAddr, GameController.PORT);
     theClient.startClient();
       
     receiver = new Receiver(this, theClient);
