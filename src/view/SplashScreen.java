@@ -3,10 +3,12 @@ package view;
 import Game.*;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+
 
 
 
@@ -37,22 +39,20 @@ public class SplashScreen extends JFrame {
 		game = thegame;
 		
 		setLayout(new BorderLayout());
-		title = new JLabel("Mateys", SwingConstants.CENTER);
-		title.setForeground(Color.RED);
-		title.setSize(20,20);
 		listen = new SplashScreenListener(game);
 		
 		background = new JLabel(new ImageIcon(getClass().getResource("/view/images/ocean.jpeg")));
 		joinGame = new JButton("Join Game");
+		joinGame.setFont(new Font("Serif", Font.PLAIN, 30));
 		newGame = new JButton("New Game");
-		buttons = new JPanel(new GridLayout(1,2,10,0));
+		newGame.setFont(new Font("Serif", Font.PLAIN, 30));
+		buttons = new JPanel(new GridLayout(1,2,0,0));
 		
 		buttons.add(newGame);
 		buttons.add(joinGame);
 		
 		add(background);
 		add(buttons,BorderLayout.SOUTH);
-		add(title,BorderLayout.NORTH);		
 		
 		newGame.addActionListener(listen);
 		joinGame.addActionListener(listen);
