@@ -5,9 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Color;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -42,40 +51,88 @@ public class WaitingScreen extends JFrame{
 		
 		IPaddress = addr;		
 		setLayout(new BorderLayout());
+		
+		// title
+		JPanel top = new JPanel();
+		top.setLayout(new BoxLayout(top, BoxLayout.Y_AXIS));
+		
+		JLabel title = new JLabel("Waiting for Players");
+		title.setAlignmentX(Component.CENTER_ALIGNMENT);
+		title.setFont(new Font("serif", Font.PLAIN, 50));
+		top.add(title);
+		
+		top.add(Box.createRigidArea(new Dimension(0, 20)));
+		
+		IPaddr = new JLabel("IP Address of this server: " + IPaddress, SwingConstants.CENTER);
+		IPaddr.setForeground(Color.BLUE);
+		IPaddr.setAlignmentX(Component.CENTER_ALIGNMENT);
+		IPaddr.setFont(new Font("serif", Font.PLAIN, 25));
+		top.add(IPaddr);
+		
+		add(top, BorderLayout.NORTH);
+		
+		// body
+		JPanel body = new JPanel();
+		body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
+		
+		body.add(Box.createRigidArea(new Dimension(0, 40)));
+		
 		playerLabels = new JLabel[4];
 		statusLabels = new JLabel[4];
 		
-		status = new JPanel(new GridLayout(4,1,0,10));
-		IPaddr = new JLabel("IP Address of this server: "+IPaddress,SwingConstants.CENTER);
-		IPaddr.setForeground(Color.BLUE);
-		status.add(IPaddr);
+		JPanel playerBoard = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		for (int i = 0; i < playerLabels.length; i++) {
+			JLabel playerPicture = new JLabel(new ImageIcon(getClass().getResource("/view/images/pirate" + (i + 1) + ".jpg")));
+			playerPicture.setPreferredSize(new Dimension(100, 70));
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.gridx = 0;
+			c.gridy = i;			
+			playerBoard.add(playerPicture, c);
+			
+			JPanel playerStatus = new JPanel();
+			playerStatus.setLayout(new FlowLayout());
+			
 			playerLabels[i] = new JLabel("");
 			statusLabels[i] = new JLabel("");
-		    status.add(playerLabels[i]);
-		    status.add(statusLabels[i]);
+			
+			playerStatus.add(playerLabels[i]);
+			//playerStatus.add(Box.createRigidArea(new Dimension(5,0)));
+			playerStatus.add(statusLabels[i]);
+			playerStatus.setAlignmentX(Component.CENTER_ALIGNMENT);
+			
+			playerStatus.setPreferredSize(new Dimension(100, 300));
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.gridx = 1;
+			c.gridy = i;
+			
+		    playerBoard.add(playerStatus, c);
 		}
+		body.add(playerBoard);
 		listen = new WaitingListener();
+		
+		add(body, BorderLayout.CENTER);
 		
 		
 		ready = new JCheckBox("I'm ready to play",false);
-		startGame = new JButton("Start Game");
-		startGame.setEnabled(false);
-		startGame.addActionListener(listen);
+		JPanel bottom = new JPanel(new FlowLayout());
+		bottom.add(ready);
+		add(bottom, BorderLayout.SOUTH);
 		
-		GetReady = new JPanel(new BorderLayout());
+		//GetReady = new JPanel(new BorderLayout());
 		
 		ready.addItemListener(new ReadyListener());
 		
-		GetReady.add(ready,BorderLayout.WEST);
-		GetReady.add(startGame, BorderLayout.EAST);
+		//GetReady.add(ready,BorderLayout.WEST);
+		//GetReady.add(startGame, BorderLayout.EAST);
 
-		add(status, BorderLayout.NORTH);
-		add(GetReady, BorderLayout.SOUTH);
+		//add(status, BorderLayout.NORTH);
+		//add(GetReady, BorderLayout.SOUTH);
 		
-		setSize(800,600);
+		setSize(850,700);
 		setVisible(true);
 		setResizable(false);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
 	public class ReadyListener implements ItemListener {
