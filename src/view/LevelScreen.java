@@ -76,6 +76,7 @@ public class LevelScreen extends JFrame{
 		instructions.setText(command);
 		timer.stop();
 		timer = new Timer(1000, new TimerListener());
+		timerLabel.setText("" + 10);
 		
 	}
 	
