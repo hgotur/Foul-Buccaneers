@@ -125,6 +125,7 @@ public class GameServerEngine {
     for(int i = 0; i < activeCommands.size(); i++) {
       if(activeCommands.get(i).index == ID) {
         Command complete = activeCommands.remove(i);
+        i--;
         game.server.sendCommandComplete(complete.player, complete.index);
         this.generateCommand(complete.player);
       }
