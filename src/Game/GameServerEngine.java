@@ -2,6 +2,7 @@ package Game;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -57,20 +58,10 @@ public class GameServerEngine {
   
   public void getNewLevelSetup(int level) {
     ArrayList<String> levelCommands = new ArrayList<String>(0);
-    try {
-      File levelCommandsFile = new File(getClass().getResource("levelCommands" + level + ".txt").toURI());
-      try{
-        Scanner input = new Scanner(levelCommandsFile);
-        while(input.hasNext()) {
-          levelCommands.add(input.nextLine());
-        }
-      }
-      catch (FileNotFoundException e) {
-        System.out.println("File Not Found");
-      }
-    }
-    catch (URISyntaxException e) {
-      System.out.println("Incorrect URI format");
+    InputStream levelCommandsFile = getClass().getResourceAsStream("levelCommands" + level + ".txt");
+    Scanner input = new Scanner(levelCommandsFile);
+    while(input.hasNext()) {
+      levelCommands.add(input.nextLine());
     }
     
     availableCommands = new ArrayList<Integer>(0);

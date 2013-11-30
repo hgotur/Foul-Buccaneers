@@ -72,7 +72,6 @@ public class Client {
         break;
     case "NS":   // new score
         break;*/
-    
     }
   }
   

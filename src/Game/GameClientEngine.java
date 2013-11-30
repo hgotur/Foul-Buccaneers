@@ -2,6 +2,7 @@ package Game;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -47,26 +48,16 @@ public class GameClientEngine {
 	    levelCommands = new ArrayList<String>(0);
 	    levelButtons = new ArrayList<String>(0);
 	    playerButtons = new ArrayList<String>(0);
-	    try {
-	      File levelCommandsFile = new File(getClass().getResource("levelCommands" + level + ".txt").toURI());
-	      File levelButtonsFile = new File(getClass().getResource("levelButtons" + level + ".txt").toURI());
-	      try{
-	        Scanner input = new Scanner(levelCommandsFile);
-	        while(input.hasNext()) {
-	          levelCommands.add(input.nextLine());
-	        }
-	        input = new Scanner(levelButtonsFile);
-	        while(input.hasNext()) {
-	          levelButtons.add(input.nextLine());
-	        }
-	      }
-	      catch (FileNotFoundException e) {
-	        System.out.println("File Not Found");
-	      }
-	    }
-	    catch (URISyntaxException e) {
-	      System.out.println("Incorrect URI format");
-	    }
+      InputStream levelCommandsFile = getClass().getResourceAsStream("levelCommands" + level + ".txt");
+      InputStream levelButtonsFile = getClass().getResourceAsStream("levelButtons" + level + ".txt");
+      Scanner input = new Scanner(levelCommandsFile);
+      while(input.hasNext()) {
+        levelCommands.add(input.nextLine());
+      }
+      input = new Scanner(levelButtonsFile);
+      while(input.hasNext()) {
+        levelButtons.add(input.nextLine());
+      }
 	}
 	
 	public boolean isUser(String username) {
