@@ -59,6 +59,9 @@ public class Client {
     	username = value.get(0);
     	game.readCommand(username, Integer.parseInt(value.get(1)));
     	break;
+    case "SD":
+      game.setShipDamage(Integer.parseInt(value.get(0)));
+      break;
     /*case "GE":  // game end
         break;
     case "LS":  // level start

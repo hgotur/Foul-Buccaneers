@@ -105,4 +105,8 @@ public class GameClientEngine {
 	public void sendCommandFailed() {
 		game.client.sendCommandFailed(curCommandIndex);
 	}
+	
+	public void setShipDamage(int damage) {
+	  levelScreen.setShipDamage(damage);
+	}
 }
