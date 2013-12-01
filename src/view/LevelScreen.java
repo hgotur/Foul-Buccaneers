@@ -119,7 +119,7 @@ public class LevelScreen extends JFrame{
 		
 		JPanel damagePanel = new JPanel();
 		damagePanel.setLayout(new BoxLayout(damagePanel, BoxLayout.Y_AXIS));
-		JLabel pirateShip = new JLabel(new ImageIcon(getClass().getResource("/view/images/pirateShip.png")));
+		JLabel pirateShip = new JLabel(new ImageIcon(getClass().getResource("/view/images/pirateship.png")));
     pirateShip.setAlignmentX(Component.CENTER_ALIGNMENT);
     JPanel innerDamagePanel = new JPanel(new FlowLayout());
     innerDamagePanel.add(pirateShip);
