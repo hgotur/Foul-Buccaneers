@@ -16,7 +16,7 @@ public class GameController {
 	//Networks
 	protected Server server;
 	protected Client client;
-	public static final int PORT = 45000;
+	public static final int PORT = 45001;
 	//Engine
 	private GameClientEngine clientEngine;
 	private GameServerEngine serverEngine;

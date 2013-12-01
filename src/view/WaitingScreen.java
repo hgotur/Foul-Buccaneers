@@ -35,6 +35,7 @@ public class WaitingScreen extends JFrame{
 	
 	JLabel [] playerLabels;
 	JLabel [] statusLabels;
+	JLabel [] checkMarks;
 	
 	JLabel IPaddr;
 	JButton startGame;
@@ -75,10 +76,9 @@ public class WaitingScreen extends JFrame{
 		JPanel body = new JPanel();
 		body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
 		
-		body.add(Box.createRigidArea(new Dimension(0, 40)));
-		
 		playerLabels = new JLabel[4];
 		statusLabels = new JLabel[4];
+		checkMarks = new JLabel[4];
 		
 		JPanel playerBoard = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -87,18 +87,24 @@ public class WaitingScreen extends JFrame{
 			playerPicture.setPreferredSize(new Dimension(100, 70));
 			c.fill = GridBagConstraints.HORIZONTAL;
 			c.gridx = 0;
-			c.gridy = i;			
+			c.gridy = i;
+			c.ipadx = 5;
+			c.ipady = 5;
 			playerBoard.add(playerPicture, c);
 			
 			JPanel playerStatus = new JPanel();
 			playerStatus.setLayout(new FlowLayout());
 			
 			playerLabels[i] = new JLabel("");
+			playerLabels[i].setFont(new Font("serif", Font.PLAIN, 25));
 			statusLabels[i] = new JLabel("");
+			statusLabels[i].setFont(new Font("serif", Font.PLAIN, 25));
+			checkMarks[i] = new JLabel("");
 			
 			playerStatus.add(playerLabels[i]);
 			//playerStatus.add(Box.createRigidArea(new Dimension(5,0)));
 			playerStatus.add(statusLabels[i]);
+			playerStatus.add(checkMarks[i]);
 			playerStatus.setAlignmentX(Component.CENTER_ALIGNMENT);
 			
 			playerStatus.setPreferredSize(new Dimension(100, 300));
@@ -159,10 +165,12 @@ public class WaitingScreen extends JFrame{
 	public void addPlayer(String username, int status, int playerPosition) {
 		playerLabels[playerPosition].setText(username);
 		if(status > 0) {
-		  statusLabels[playerPosition].setText("is Aboard!");
+		  statusLabels[playerPosition].setText("is aboard!");
+		  checkMarks[playerPosition].setIcon(new ImageIcon(getClass().getResource("/view/images/checkmark.png")));
 		}
 		else {
-		  statusLabels[playerPosition].setText("is not Aboard!");
+		  statusLabels[playerPosition].setText("is not aboard!");
+		  checkMarks[playerPosition].setIcon(null);
 		}
 	}
 	
@@ -171,9 +179,11 @@ public class WaitingScreen extends JFrame{
 			playerLabels[i].setText(waitingPlayers[i]);
 			if (isReady[i] == true) {
 				statusLabels[i].setText("is aboard!");
+				checkMarks[i].setIcon(new ImageIcon(getClass().getResource("/view/images/checkmark.png")));
 			}
 			else {
 				statusLabels[i].setText("is not aboard!");
+				checkMarks[i].setIcon(null);
 			}
 		}
 	}
@@ -184,6 +194,9 @@ public class WaitingScreen extends JFrame{
 	  }
 	  for(JLabel statusLabel : statusLabels) {
 	    statusLabel.setText("");
+	  }
+	  for (JLabel checkMark : checkMarks) {
+		  checkMark.setIcon(null);
 	  }
 	}
 }
