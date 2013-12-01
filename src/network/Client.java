@@ -37,9 +37,9 @@ public class Client {
       break;
     case "P":   // players
     	break;
-    /*case "GS":  // game start
+    case "GS":  // game start
       game.letsGetStarted();
-      break;*/
+      break;
     case "LL":	//level load
     	game.getNewLevelSetup(Integer.parseInt(value.get(0)));
     	break;

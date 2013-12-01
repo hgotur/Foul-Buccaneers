@@ -90,7 +90,7 @@ public class GameClientEngine {
 	
 	public void addButtonsToLevel(String username, ArrayList<Integer> buttons) {
 		if (!isUser(username)) return;
-		levelScreen = new LevelScreen(this, curLevel, buttons.size());
+		levelScreen = new LevelScreen(this, curLevel, levelTimer.get(curLevel - 1), levelShipDamage.get(curLevel - 1));
 		ArrayList<String> buttonText = new ArrayList<String>(0);
 		for (int i : buttons) {
 			buttonText.add(levelButtons.get(i));

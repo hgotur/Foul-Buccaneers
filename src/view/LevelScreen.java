@@ -32,6 +32,7 @@ public class LevelScreen extends JFrame{
 	JLabel mainPanel;
 	JPanel buttonPanel;
 	JPanel timeInstr;
+	JPanel buttonGrid;
 	
 	JLabel timerLabel;
 	JLabel shipDamage;
@@ -41,15 +42,17 @@ public class LevelScreen extends JFrame{
 	ArrayList<JButton> buttons;
 	
 	Timer timer;
+	int timerTime;
 	
 	public LevelScreen(){
 		super("ARRGH");
 	}
 
-	public LevelScreen(GameClientEngine theGame, int level){
+	public LevelScreen(GameClientEngine theGame, int level, int time, int shipDamageNumber){
 		super("ARRGH");
 		
 		game = theGame;
+		timerTime = time;
 		
 		timerLabel = new JLabel("");
 		timerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -62,29 +65,21 @@ public class LevelScreen extends JFrame{
 		mainPanel.setLayout(new GridBagLayout());
 		
 		buttons = new ArrayList<JButton>(0);
-		for(int i = 0; i < 4; i++) {
-		  JButton theButton = new JButton("");
-		  theButton.setFont(new Font("serif", Font.PLAIN, 24));
-		  buttons.add(theButton);
-		}
 		
 		instructions = new JLabel("");
 		instructions.setForeground(Color.white);
 		instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
 		instructions.setFont(new Font("serif", Font.BOLD, 24));
 		
-		shipDamage = new JLabel("10");
+		shipDamage = new JLabel("" + shipDamageNumber);
 		shipDamage.setForeground(Color.white);
 		shipDamage.setAlignmentX(Component.CENTER_ALIGNMENT);
 		shipDamage.setFont(new Font("serif", Font.BOLD, 30));
 		
-		int rows = buttons.size()/2;
-		int columns = buttons.size()/2;
-		JPanel buttonGrid = new JPanel(new GridLayout(rows, columns, 20, 20));
+		//int rows = buttons.size()/2;
+		//int columns = buttons.size()/2;
+		buttonGrid = new JPanel(new GridLayout(3, 2, 20, 20));
 		buttonGrid.setOpaque(false);
-		for (JButton button: buttons) {
-			buttonGrid.add(button);
-		}
 		
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -168,12 +163,11 @@ public class LevelScreen extends JFrame{
 	}
 	
 	public void newCommand(String command) {
-		instructions.setText(command);
+		instructions.setText("<html><body style='text-align:center'>"+command+"</body></html>");
 		timer.stop();
 		timer = new Timer(1000, new TimerListener());
-		timerLabel.setText("" + 10);
+		timerLabel.setText("" + timerTime);
 		timer.start();
-		
 	}
 	
 	public void setShipDamage(int newDamage) {
@@ -181,9 +175,12 @@ public class LevelScreen extends JFrame{
 	}
 	
 	public void addButtons(ArrayList<String> buttonText, ArrayList<Integer> buttonIndex) {
-	  for(JButton button : buttons) {
-  	  button.setText(buttonText.remove(0));
-  	  button.addActionListener(new ButtonListener(buttonIndex.remove(0)));
+	  buttons = new ArrayList<JButton>(0);
+	  for(int i = 0; i < buttonText.size(); i++) {
+  	  buttons.add(new JButton(buttonText.get(i)));
+  	  buttons.get(i).addActionListener(new ButtonListener(buttonIndex.get(i)));
+  	  buttons.get(i).setFont(new Font("serif", Font.PLAIN, 24));
+  	  buttonGrid.add(buttons.get(i));
 	  }
 	}
 		
@@ -198,7 +195,7 @@ public class LevelScreen extends JFrame{
 	}
 	
 	public class TimerListener implements ActionListener {
-		private int elapsedSeconds = 10;
+		private int elapsedSeconds = timerTime;
 	    public void actionPerformed(ActionEvent evt){
 	        elapsedSeconds--;
 	        timerLabel.setText("" + elapsedSeconds);
