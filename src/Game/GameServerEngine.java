@@ -69,7 +69,7 @@ public class GameServerEngine {
       }
     }
     game.server.sendPlayers(players);
-    if(readyPlayers == players.size()) {
+    if(readyPlayers == players.size() && players.size() > 1) {
       game.server.sendStartGame();
       this.started = true;
       this.currentLevel = 1;
