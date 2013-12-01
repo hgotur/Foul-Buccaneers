@@ -97,6 +97,13 @@ public class GameServerEngine {
       System.out.println(levelCommands.get(command));
     }
     
+    try {
+      Thread.sleep(4000);
+    } catch (InterruptedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    
     game.server.sendStartLevel();
     for(Player player : players) {
       this.generateCommand(player.name);
