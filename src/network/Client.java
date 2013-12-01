@@ -71,9 +71,13 @@ public class Client {
     	game.gameWon();
     	break;
     case "GAS":
-    	 JOptionPane.showMessageDialog(null, "Could not connect to the server. Game already in progress.", "Connection Error", JOptionPane.ERROR_MESSAGE);
+    	 JOptionPane.showMessageDialog(null, "Argggh!! You're ship has already set sail. You're too late! Arrgghh!!.", "Connection Error", JOptionPane.ERROR_MESSAGE);
          System.exit(10);
          break;
+    case "GF":
+    	JOptionPane.showMessageDialog(null, "Arggghh!! Too many pirates on the ship. Start your own game. Arrgghh!!", "Connection Error", JOptionPane.ERROR_MESSAGE); 
+        System.exit(10);
+        break;
     /*case "GE":  // game end
         break;
     case "LS":  // level start
