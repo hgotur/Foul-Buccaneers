@@ -31,7 +31,7 @@ public class StartServerScreen extends JDialog {
 			game = theGame;
 		}
 		public void actionPerformed(ActionEvent e){
-			if (getUsername().equals("")) {
+			if (!getUsername().equals("")) {
 				setVisible(false);
 				game.player = new Player(usernameField.getText(), 0);
 				game.newGame();
