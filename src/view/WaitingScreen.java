@@ -39,7 +39,8 @@ public class WaitingScreen extends JFrame{
 	
 	JLabel IPaddr;
 	JButton startGame;
-	JCheckBox ready;
+	JButton ready;
+	int playerStatus;
 	JPanel status;
 	JPanel GetReady;
 	WaitingListener listen;
@@ -120,14 +121,16 @@ public class WaitingScreen extends JFrame{
 		add(body, BorderLayout.CENTER);
 		
 		
-		ready = new JCheckBox("I'm ready to play",false);
+		ready = new JButton("I'm ready to play");
+		playerStatus = 0;
+		ready.setFont(new Font("serif", Font.PLAIN, 30));
 		JPanel bottom = new JPanel(new FlowLayout());
 		bottom.add(ready);
 		add(bottom, BorderLayout.SOUTH);
 		
 		//GetReady = new JPanel(new BorderLayout());
 		
-		ready.addItemListener(new ReadyListener());
+		ready.addActionListener(new ReadyListener());
 		
 		//GetReady.add(ready,BorderLayout.WEST);
 		//GetReady.add(startGame, BorderLayout.EAST);
@@ -141,14 +144,18 @@ public class WaitingScreen extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	public class ReadyListener implements ItemListener {
-		public void itemStateChanged(ItemEvent e){
-		  if(e.getStateChange() == ItemEvent.SELECTED) {
-		    game.updatePlayerStatus(1);
-		  }
-		  else {
-		    game.updatePlayerStatus(0);
-		  }
+	public class ReadyListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			if (playerStatus == 0) {
+				ready.setText("Wait! I'm not ready");
+				playerStatus = 1;
+			}
+			else {
+				ready.setText("I'm ready to play");
+				playerStatus = 0;
+			}
+			game.updatePlayerStatus(playerStatus);
+			
 		}
 	}
 	
