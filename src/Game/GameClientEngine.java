@@ -16,11 +16,11 @@ public class GameClientEngine {
 	
 	private LevelScreen levelScreen;
 	private ArrayList<String> levelCommands;
-	ArrayList<String> levelButtons;
-	ArrayList<String> playerButtons;
-	ArrayList<String> levelTextArray;
-	ArrayList<Integer> levelTimer;
-	ArrayList<Integer> levelShipDamage;
+	private ArrayList<String> levelButtons;
+	private ArrayList<String> playerButtons;
+	private ArrayList<String> levelTextArray;
+	private ArrayList<Integer> levelTimer;
+	private ArrayList<Integer> levelShipDamage;
 	int curLevel;
 	int curCommandIndex;
 	
@@ -131,5 +131,10 @@ public class GameClientEngine {
 	public void endGame() {
 		levelScreen.setVisible(false);
 		game.gameOverScreen = new GameOverScreen();
+	}
+	
+	public void gameWon() {
+		levelScreen.setVisible(false);
+		game.gameWonScreen = new GameWonScreen();
 	}
 }

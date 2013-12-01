@@ -67,6 +67,9 @@ public class Client {
     case "GO":
     	game.endGame();
     	break;
+    case "GW":
+    	game.gameWon();
+    	break;
     /*case "GE":  // game end
         break;
     case "LS":  // level start

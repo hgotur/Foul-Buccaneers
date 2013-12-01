@@ -14,6 +14,7 @@ public class GameController {
 	protected JoinGameScreen joinGameScreen;
 	protected GameStartScreen gameStartScreen;
 	protected GameOverScreen gameOverScreen;
+	protected GameWonScreen gameWonScreen;
 	//Networks
 	protected Server server;
 	protected Client client;
