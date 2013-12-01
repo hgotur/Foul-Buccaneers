@@ -16,6 +16,8 @@ public class GameServerEngine {
   private ArrayList<Command> activeCommands;
   private int commandsSent = 0;
   ArrayList<Player> players;
+  private ArrayList<String> levelCommands;
+  private ArrayList<Integer> levelSettings;
   
   public boolean started = false;
   public int currentLevel;
@@ -27,6 +29,19 @@ public class GameServerEngine {
     game = theGame;
     players = new ArrayList<Player>(0);
     activeCommands = new ArrayList<Command>(0);
+    levelCommands = new ArrayList<String>(0);
+    levelSettings = new ArrayList<Integer>(0);
+    
+    InputStream levelCommandsFile = getClass().getResourceAsStream("levelCommands.txt");
+    InputStream levelSettingsFile = getClass().getResourceAsStream("serverLevelSettings.txt");
+    Scanner input = new Scanner(levelCommandsFile);
+    while(input.hasNext()) {
+      levelCommands.add(input.nextLine());
+    }
+    input = new Scanner(levelSettingsFile);
+    while(input.hasNext()) {
+      levelSettings.add(input.nextInt());
+    }
   }
   
   public void addPlayer(String playerName, int status) {
@@ -57,23 +72,15 @@ public class GameServerEngine {
   }
   
   public void getNewLevelSetup(int level) {
-    ArrayList<String> levelCommands = new ArrayList<String>(0);
-    InputStream levelCommandsFile = getClass().getResourceAsStream("levelCommands" + level + ".txt");
-    Scanner input = new Scanner(levelCommandsFile);
-    while(input.hasNext()) {
-      levelCommands.add(input.nextLine());
-    }
-    
     availableCommands = new ArrayList<Integer>(0);
     ArrayList<Integer> commandIndexes = new ArrayList<Integer>(levelCommands.size());
-    
     for(int i = 0; i < levelCommands.size(); i++) {
       commandIndexes.add(i);
     }
     
     for(Player player : players) {
-      int [] availableButtons = new int [4];
-      for(int i = 0; i < 4; i++){
+      int [] availableButtons = new int [levelSettings.get(level)];
+      for(int i = 0; i < availableButtons.length; i++){
         int index = random.nextInt(commandIndexes.size());
         int commandIndex = commandIndexes.remove(index);
         availableCommands.add(commandIndex);
