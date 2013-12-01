@@ -147,11 +147,11 @@ public class WaitingScreen extends JFrame{
 	public class ReadyListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			if (playerStatus == 0) {
-				ready.setText("Wait! I'm not ready");
+				ready.setText("NOT Ready to Start");
 				playerStatus = 1;
 			}
 			else {
-				ready.setText("I'm ready to play");
+				ready.setText("Ready to Start");
 				playerStatus = 0;
 			}
 			game.updatePlayerStatus(playerStatus);
