@@ -3,6 +3,8 @@ import static java.lang.System.out;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import Game.*;
 
 public class Client {
@@ -62,6 +64,10 @@ public class Client {
     case "SD":
       game.setShipDamage(Integer.parseInt(value.get(0)));
       break;
+    case "GO":
+    	JOptionPane.showMessageDialog(null, "Oh no! The ship took took too much damage. You need to work better as a team! GAME OVER!", "Game Over", JOptionPane.ERROR_MESSAGE);
+    	System.exit(0);
+    	break;
     /*case "GE":  // game end
         break;
     case "LS":  // level start
