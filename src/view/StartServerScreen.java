@@ -32,6 +32,7 @@ public class StartServerScreen extends JDialog {
 		public void actionPerformed(ActionEvent e){
 			System.out.println("Enter Pressed");
 			setVisible(false);
+			game.player = new Player(usernameField.getText(), 0);
 			game.newGame();
 		}
 	}
@@ -63,5 +64,9 @@ public class StartServerScreen extends JDialog {
 	
 	public String getUsername(){
 		return usernameField.getText();
+	}
+	
+	public String sayHello(){
+		return "Hello World!";
 	}
 }

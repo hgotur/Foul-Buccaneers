@@ -43,7 +43,7 @@ public class GameController {
     serverThread.start();
     
     try {
-      joinGame(InetAddress.getLocalHost().getHostAddress(), serverScreen.getUsername());
+      joinGame(InetAddress.getLocalHost().getHostAddress(), player.name);
     } catch (UnknownHostException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -55,7 +55,6 @@ public class GameController {
 	  waitingRoom = new WaitingScreen(this, ipaddress);
 	  clientEngine = new GameClientEngine(this);
 	  client = new Client(clientEngine, ipaddress);
-	  player = new Player(username, 0);
     client.sendUsername(username, 0);
 	}
 	

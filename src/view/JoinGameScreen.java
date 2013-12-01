@@ -74,6 +74,7 @@ public class JoinGameScreen extends JDialog{
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource() == enter){
 			    setVisible(false);
+			    game.player = new Player(getUsername(), 0);
 				game.joinGame(ip.getText(), getUsername());
 			}
 		}
