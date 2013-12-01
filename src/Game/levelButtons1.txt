@@ -19,7 +19,9 @@ Pass Out Provisions
 Scan Horizon
 Check Map
 Raise Anchor
-Restock Cannons
+Restock Cannonballs
+Eat Oranges
+Restock Provisions
 Enter Crow's Nest
 Kill Dissenters
 Board Enemy Ship
