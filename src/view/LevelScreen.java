@@ -3,8 +3,10 @@ package view;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -12,6 +14,7 @@ import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,6 +29,7 @@ import Game.*;
 public class LevelScreen extends JFrame{
 	private GameClientEngine game;
 	
+	JLabel mainPanel;
 	JPanel buttonPanel;
 	JPanel timeInstr;
 	
@@ -48,72 +52,116 @@ public class LevelScreen extends JFrame{
 		game = theGame;
 		
 		timerLabel = new JLabel("");
-		buttonBorder = new TitledBorder("Actions");
+		timerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		timerLabel.setForeground(Color.white);
+		timerLabel.setFont(new Font("serif", Font.BOLD, 30));
+		
 		setResizable(false);
-		setLayout(new GridBagLayout());
+		
+		mainPanel = new JLabel(new ImageIcon(getClass().getResource("/view/images/gamebg.jpg")));
+		mainPanel.setLayout(new GridBagLayout());
 		
 		buttons = new ArrayList<JButton>(0);
 		for(int i = 0; i < 4; i++) {
-		  buttons.add(new JButton(""));
+		  JButton theButton = new JButton("");
+		  theButton.setFont(new Font("serif", Font.PLAIN, 24));
+		  buttons.add(theButton);
 		}
 		
 		instructions = new JLabel("");
+		instructions.setForeground(Color.white);
+		instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
+		instructions.setFont(new Font("serif", Font.BOLD, 24));
+		
 		shipDamage = new JLabel("10");
-			
-		buttonPanel = new JPanel(new GridLayout(2,2,10,10));
+		shipDamage.setForeground(Color.white);
+		shipDamage.setAlignmentX(Component.CENTER_ALIGNMENT);
+		shipDamage.setFont(new Font("serif", Font.BOLD, 30));
+		
+		int rows = buttons.size()/2;
+		int columns = buttons.size()/2;
+		JPanel buttonGrid = new JPanel(new GridLayout(rows, columns, 20, 20));
+		buttonGrid.setOpaque(false);
 		for (JButton button: buttons) {
-			buttonPanel.add(button);
+			buttonGrid.add(button);
 		}
+		
+		GridBagConstraints c = new GridBagConstraints();
+		
+		buttonPanel = new JPanel(new GridBagLayout());
+		c.gridx = 1;
+		c.gridy = 1;
+		buttonPanel.add(buttonGrid, c);
 		buttonPanel.setBorder(buttonBorder);
-		buttonPanel.setPreferredSize(new Dimension(700, 500));
+		buttonPanel.setOpaque(false);
+		buttonPanel.setPreferredSize(new Dimension(700,480));
 		
 		timer = new Timer(1000, new TimerListener());
 		
 		JPanel timerPanel = new JPanel();
-		timerPanel.setLayout(new BoxLayout(timerPanel, BoxLayout.PAGE_AXIS));
-		timerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		timerPanel.add(new JButton("Image goes here"));
-		timerPanel.add(timerLabel);
-		timerPanel.setPreferredSize(new Dimension(210, 150));
+		timerPanel.setLayout(new BoxLayout(timerPanel, BoxLayout.Y_AXIS));
+		JLabel timerTitle = new JLabel("Time Remaining");
+		timerTitle.setFont(new Font("serif", Font.BOLD, 24));
+		timerTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+		timerTitle.setForeground(Color.white);
+		timerPanel.add(timerTitle);
+		JPanel innerTimerPanel = new JPanel(new FlowLayout());
+		innerTimerPanel.add(new JLabel(new ImageIcon(getClass().getResource("/view/images/hourglass.png"))));
+		innerTimerPanel.add(timerLabel);
+		innerTimerPanel.setOpaque(false);
+		timerPanel.add(innerTimerPanel);
+		timerPanel.setOpaque(false);
+		timerPanel.setPreferredSize(new Dimension(210, 170));
 		
-		JPanel commandPanel = new JPanel(new FlowLayout());
-		commandPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		JPanel commandPanel = new JPanel();
+		commandPanel.setLayout(new BoxLayout(commandPanel, BoxLayout.Y_AXIS));
+		JLabel shipWheel = new JLabel(new ImageIcon(getClass().getResource("/view/images/ship-wheel.png")));
+		shipWheel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		commandPanel.add(shipWheel);
 		commandPanel.add(instructions);
-		commandPanel.setPreferredSize(new Dimension(420, 150));
+		commandPanel.setOpaque(false);
+		commandPanel.setPreferredSize(new Dimension(420, 170));
 		
 		JPanel damagePanel = new JPanel();
-		damagePanel.setLayout(new BoxLayout(damagePanel, BoxLayout.PAGE_AXIS));
-		damagePanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		damagePanel.add(new JButton("Image goes here."));
-		damagePanel.add(shipDamage);
-		damagePanel.setPreferredSize(new Dimension(210, 150));
-		
-		timeInstr = new JPanel(new GridBagLayout());
-		timeInstr.setPreferredSize(new Dimension(850, 100));
-		GridBagConstraints c = new GridBagConstraints();
+		damagePanel.setLayout(new BoxLayout(damagePanel, BoxLayout.Y_AXIS));
+		JLabel pirateShip = new JLabel(new ImageIcon(getClass().getResource("/view/images/pirateShip.png")));
+    pirateShip.setAlignmentX(Component.CENTER_ALIGNMENT);
+    JPanel innerDamagePanel = new JPanel(new FlowLayout());
+    innerDamagePanel.add(pirateShip);
+    innerDamagePanel.add(shipDamage);
+    innerDamagePanel.setOpaque(false);
+    JLabel damageTitle = new JLabel("Ship Damage");
+    damageTitle.setFont(new Font("serif", Font.BOLD, 24));
+    damageTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+    damageTitle.setForeground(Color.white);
+    damagePanel.add(damageTitle);
+		damagePanel.add(innerDamagePanel);
+		damagePanel.setOpaque(false);
+		damagePanel.setPreferredSize(new Dimension(210, 170));
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 0;
-		add(timerPanel, c);
+		mainPanel.add(timerPanel, c);
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
     c.gridx = 1;
     c.gridy = 0;
-		add(commandPanel, c);
+    mainPanel.add(commandPanel, c);
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
     c.gridx = 2;
     c.gridy = 0;
-		add(damagePanel, c);		
+    mainPanel.add(damagePanel, c);		
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
     c.gridx = 0;
     c.gridy = 1;
     c.gridheight = 2;
     c.gridwidth = 3;
-		add(buttonPanel, c);
+    mainPanel.add(buttonPanel, c);
 		
+    add(mainPanel);
 		setSize(850,700);
 		setVisible(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
