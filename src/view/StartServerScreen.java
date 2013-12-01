@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Color;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JDialog;
 import javax.swing.JButton;
@@ -30,10 +31,14 @@ public class StartServerScreen extends JDialog {
 			game = theGame;
 		}
 		public void actionPerformed(ActionEvent e){
-			System.out.println("Enter Pressed");
-			setVisible(false);
-			game.player = new Player(usernameField.getText(), 0);
-			game.newGame();
+			if (getUsername().equals("")) {
+				setVisible(false);
+				game.player = new Player(usernameField.getText(), 0);
+				game.newGame();
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "D'ya have name matey?.", "Connection Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 	

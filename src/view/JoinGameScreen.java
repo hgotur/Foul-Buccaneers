@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -72,11 +73,20 @@ public class JoinGameScreen extends JDialog{
 	        game = thegame;
 	    }
 		public void actionPerformed(ActionEvent e){
-			if(e.getSource() == enter){
-			    setVisible(false);
+			System.out.println(getUsername());
+		
+			if (!ip.getText().equals("") && !getUsername().equals("")) {
+				setVisible(false);
 			    game.player = new Player(getUsername(), 0);
 				game.joinGame(ip.getText(), getUsername());
 			}
+			else if (ip.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "Enter an IP Address matey.", "Connection Error", JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "D'ya have name matey?", "Connection Error", JOptionPane.ERROR_MESSAGE);
+			}
+			    
 		}
 	}
 }
