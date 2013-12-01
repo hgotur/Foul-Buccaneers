@@ -17,7 +17,8 @@ public class GameServerEngine {
   private int commandsSent = 0;
   ArrayList<Player> players;
   private ArrayList<String> levelCommands;
-  private ArrayList<Integer> levelSettings;
+  private ArrayList<Integer> levelButtonSettings;
+  private ArrayList<Integer> levelShipDamage;
   
   public boolean started = false;
   public int currentLevel;
@@ -30,7 +31,8 @@ public class GameServerEngine {
     players = new ArrayList<Player>(0);
     activeCommands = new ArrayList<Command>(0);
     levelCommands = new ArrayList<String>(0);
-    levelSettings = new ArrayList<Integer>(0);
+    levelButtonSettings = new ArrayList<Integer>(0);
+    levelShipDamage = new ArrayList<Integer>(0);
     
     InputStream levelCommandsFile = getClass().getResourceAsStream("levelCommands.txt");
     InputStream levelSettingsFile = getClass().getResourceAsStream("serverLevelSettings.txt");
@@ -40,7 +42,8 @@ public class GameServerEngine {
     }
     input = new Scanner(levelSettingsFile);
     while(input.hasNext()) {
-      levelSettings.add(input.nextInt());
+      levelButtonSettings.add(input.nextInt());
+      levelShipDamage.add(input.nextInt());
     }
   }
   
@@ -73,13 +76,14 @@ public class GameServerEngine {
   
   public void getNewLevelSetup(int level) {
     availableCommands = new ArrayList<Integer>(0);
+    shipDamage = levelShipDamage.get(level-1);
     ArrayList<Integer> commandIndexes = new ArrayList<Integer>(levelCommands.size());
     for(int i = 0; i < levelCommands.size(); i++) {
       commandIndexes.add(i);
     }
     
     for(Player player : players) {
-      int [] availableButtons = new int [levelSettings.get(level)];
+      int [] availableButtons = new int [levelButtonSettings.get(level-1)];
       for(int i = 0; i < availableButtons.length; i++){
         int index = random.nextInt(commandIndexes.size());
         int commandIndex = commandIndexes.remove(index);
