@@ -13,6 +13,7 @@ public class GameController {
 	protected WaitingScreen waitingRoom;
 	protected JoinGameScreen joinGameScreen;
 	protected GameStartScreen gameStartScreen;
+	protected GameOverScreen gameOverScreen;
 	//Networks
 	protected Server server;
 	protected Client client;

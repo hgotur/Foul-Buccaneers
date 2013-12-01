@@ -65,8 +65,7 @@ public class Client {
       game.setShipDamage(Integer.parseInt(value.get(0)));
       break;
     case "GO":
-    	JOptionPane.showMessageDialog(null, "Oh no! The ship took took too much damage. You need to work better as a team! GAME OVER!", "Game Over", JOptionPane.ERROR_MESSAGE);
-    	System.exit(0);
+    	game.endGame();
     	break;
     /*case "GE":  // game end
         break;

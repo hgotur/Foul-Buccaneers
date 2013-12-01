@@ -121,4 +121,9 @@ public class GameClientEngine {
 	public void setShipDamage(int damage) {
 	  levelScreen.setShipDamage(damage);
 	}
+	
+	public void endGame() {
+		levelScreen.setVisible(false);
+		game.gameOverScreen = new GameOverScreen();
+	}
 }
