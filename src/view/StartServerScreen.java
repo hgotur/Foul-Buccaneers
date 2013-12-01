@@ -37,7 +37,7 @@ public class StartServerScreen extends JDialog {
 				game.newGame();
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "D'ya have name matey?.", "Connection Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "D'ya have name matey?", "Connection Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
