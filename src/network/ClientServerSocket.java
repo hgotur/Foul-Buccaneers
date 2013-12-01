@@ -63,7 +63,7 @@ public class ClientServerSocket {
     }
     catch (IOException e) {
       System.out.println("Caught IOException Writing To Socket Stream!");
-      JOptionPane.showMessageDialog(null, "Oh no! Someone done fucked up!", "Game Over", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, "Oh no! Someone left the game! Ye need all yer mateys to play!", "Game Over", JOptionPane.ERROR_MESSAGE);
       System.exit(-1);
     }
     return (success);
@@ -88,7 +88,7 @@ public class ClientServerSocket {
     }
     catch (IOException ioe) {
       out.println("ERROR: receiving string from socket");
-      JOptionPane.showMessageDialog(null, "Oh no! Someone disconnected! Cannot continue the game!", "Game Over", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, "Oh no! Someone left the game! Ye need all yer mateys to play!", "Game Over", JOptionPane.ERROR_MESSAGE);
       System.exit(8);
     }
     return (receivedString);
