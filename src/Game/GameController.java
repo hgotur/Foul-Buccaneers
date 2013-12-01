@@ -29,11 +29,11 @@ public class GameController {
 	}
 	
 	public void getNewGameInfo() {
-		serverScreen = new StartServerScreen(this);
+		serverScreen = new StartServerScreen(this, splashScreen);
 	}
 	
 	public void getJoinGameInfo() {
-		joinGameScreen = new JoinGameScreen(this);
+		joinGameScreen = new JoinGameScreen(this, splashScreen);
 	}
 	
 	public void newGame() {

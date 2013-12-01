@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
-public class StartServerScreen extends JFrame {
+public class StartServerScreen extends JDialog {
 	
 	JTextField usernameField;
 	JButton enter;
@@ -36,9 +36,8 @@ public class StartServerScreen extends JFrame {
 		}
 	}
 	
-	public StartServerScreen(GameController game){
-		
-		super("Start New Game");
+	public StartServerScreen(GameController game, SplashScreen splashScreen){
+		super(splashScreen, "Create Server", true);
 		setLayout(new BorderLayout());
 		setResizable(false);
 		usernameField = new JTextField(50);

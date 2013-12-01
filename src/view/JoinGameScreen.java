@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import Game.*;
 
-public class JoinGameScreen extends JFrame{
+public class JoinGameScreen extends JDialog{
 	JButton enter;
 	JTextField ip;
 	JTextField username;
@@ -29,8 +29,8 @@ public class JoinGameScreen extends JFrame{
 	
 	GameController game;
 	
-	public JoinGameScreen(GameController thegame){
-		super("Enter IP Adress");
+	public JoinGameScreen(GameController thegame, SplashScreen splashScreen){
+		super(splashScreen, "Join Game", true);
 		game = thegame;
 		
 		setLayout(new BorderLayout());
