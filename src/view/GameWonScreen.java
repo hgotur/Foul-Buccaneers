@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 public class GameWonScreen extends JFrame {
 	public GameWonScreen() {
 		super("You Won!");
-		JLabel background = new JLabel(new ImageIcon(getClass().getResource("/view/images/gameover.png")));
+		JLabel background = new JLabel(new ImageIcon(getClass().getResource("/view/images/youwin.png")));
 		add(background);
 		
 		setSize(700,600);
