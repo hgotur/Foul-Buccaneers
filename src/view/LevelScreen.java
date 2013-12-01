@@ -46,7 +46,7 @@ public class LevelScreen extends JFrame{
 		super("ARRGH");
 	}
 
-	public LevelScreen(GameClientEngine theGame, int level, int numButtons){
+	public LevelScreen(GameClientEngine theGame, int level){
 		super("ARRGH");
 		
 		game = theGame;
