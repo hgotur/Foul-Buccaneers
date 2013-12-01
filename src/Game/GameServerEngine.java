@@ -14,15 +14,17 @@ public class GameServerEngine {
   private GameController game;
   private ArrayList<Integer> availableCommands;
   private ArrayList<Command> activeCommands;
-  private int commandsSent = 0;
   ArrayList<Player> players;
   private ArrayList<String> levelCommands;
   private ArrayList<Integer> levelButtonSettings;
   private ArrayList<Integer> levelShipDamage;
+  private ArrayList<Integer> levelWinSettings;
   
   public boolean started = false;
+  private int commandsSent;
   public int currentLevel;
-  public int shipDamage = 10;
+  public int shipDamage;
+  public int winMoves;
   
   Random random = new Random();
   
@@ -33,24 +35,26 @@ public class GameServerEngine {
     levelCommands = new ArrayList<String>(0);
     levelButtonSettings = new ArrayList<Integer>(0);
     levelShipDamage = new ArrayList<Integer>(0);
+    levelWinSettings = new ArrayList<Integer>(0);
     
     InputStream levelCommandsFile = getClass().getResourceAsStream("levelCommands.txt");
-    InputStream levelSettingsFile = getClass().getResourceAsStream("serverLevelSettings.txt");
+    InputStream levelSettingsFile = getClass().getResourceAsStream("levelSettings.txt");
     Scanner input = new Scanner(levelCommandsFile);
     while(input.hasNext()) {
       levelCommands.add(input.nextLine());
     }
     input = new Scanner(levelSettingsFile);
     while(input.hasNext()) {
-      levelButtonSettings.add(input.nextInt());
+      input.nextInt();
       levelShipDamage.add(input.nextInt());
+      levelButtonSettings.add(input.nextInt());
+      levelWinSettings.add(input.nextInt());
     }
   }
   
   public void addPlayer(String playerName, int status) {
 	  Player player = new Player(playerName, status);
 	  players.add(player);
-
 	  game.server.sendPlayers(players);
   }
   
@@ -75,8 +79,11 @@ public class GameServerEngine {
   }
   
   public void getNewLevelSetup(int level) {
-    availableCommands = new ArrayList<Integer>(0);
     shipDamage = levelShipDamage.get(level-1);
+    winMoves = levelWinSettings.get(level-1);
+    commandsSent = 0;
+    
+    availableCommands = new ArrayList<Integer>(0);
     ArrayList<Integer> commandIndexes = new ArrayList<Integer>(levelCommands.size());
     for(int i = 0; i < levelCommands.size(); i++) {
       commandIndexes.add(i);
@@ -115,8 +122,10 @@ public class GameServerEngine {
     activeCommands.add(new Command(player, commandIndex));
     game.server.sendCommand(player, commandIndex);
     this.commandsSent++;
-    if(this.commandsSent > 20) {
-      game.server.sendLevelComplete();
+    if(this.commandsSent > winMoves) {
+      currentLevel++;
+      game.server.sendPreparingLevel(currentLevel);
+      getNewLevelSetup(currentLevel);
     }
   }
   

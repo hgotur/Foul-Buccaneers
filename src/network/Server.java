@@ -91,10 +91,6 @@ public class Server implements Runnable {
     serverSender.sendToAll("GO");
   }
   
-  public void sendLevelComplete() {
-    serverSender.sendToAll("LC");
-  }
-  
   public void translate(String command, ArrayList<String> values, int clientID) {  
     switch (command) {
       case "U": 
