@@ -91,6 +91,10 @@ public class Server implements Runnable {
     serverSender.sendToAll("GO");
   }
   
+  public void sendGameWin() {
+    serverSender.sendToAll("GW");
+  }
+  
   public void translate(String command, ArrayList<String> values, int clientID) {  
     switch (command) {
       case "U": 

@@ -124,8 +124,13 @@ public class GameServerEngine {
     this.commandsSent++;
     if(this.commandsSent > winMoves) {
       currentLevel++;
-      game.server.sendPreparingLevel(currentLevel);
-      getNewLevelSetup(currentLevel);
+      if(currentLevel >= levelCommands.size()){
+        game.server.sendGameWin();
+      }
+      else{
+        game.server.sendPreparingLevel(currentLevel);
+        getNewLevelSetup(currentLevel);
+      }
     }
   }
   
