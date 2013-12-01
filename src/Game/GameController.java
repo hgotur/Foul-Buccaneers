@@ -64,9 +64,5 @@ public class GameController {
 	  client.sendWaitingStateChange(player.name, status);
 	}
 	
-	public void letsGetStarted() {
-	  waitingRoom.setVisible(false);
-	  gameStartScreen = new GameStartScreen();
-	}
 	
 }

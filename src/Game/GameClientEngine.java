@@ -18,11 +18,40 @@ public class GameClientEngine {
 	private ArrayList<String> levelCommands;
 	ArrayList<String> levelButtons;
 	ArrayList<String> playerButtons;
+	ArrayList<String> levelTextArray;
+	ArrayList<Integer> levelTimer;
+	ArrayList<Integer> levelShipDamage;
 	int curLevel;
 	int curCommandIndex;
 	
 	public GameClientEngine(GameController theGame) {
 	  game = theGame;
+	
+	  
+		  levelCommands = new ArrayList<String>(0);
+		    levelButtons = new ArrayList<String>(0);
+		    playerButtons = new ArrayList<String>(0);
+	    InputStream levelCommandsFile = getClass().getResourceAsStream("levelCommands.txt");
+	    InputStream levelButtonsFile = getClass().getResourceAsStream("levelButtons.txt");
+	    InputStream levelTextFile = getClass().getResourceAsStream("levelText.txt");
+	    InputStream clientLevelSettingsFile = getClass().getResourceAsStream("clientLevelSettings.txt");
+	    Scanner input = new Scanner(levelCommandsFile);
+	    while(input.hasNext()) {
+	      levelCommands.add(input.nextLine());
+	    }
+	    input = new Scanner(levelButtonsFile);
+	    while(input.hasNext()) {
+	      levelButtons.add(input.nextLine());
+	    }
+	    input = new Scanner(levelTextFile);
+	    while (input.hasNext()) {
+	    	levelTextArray.add(input.nextLine());
+	    }
+	    input = new Scanner(clientLevelSettingsFile);
+	    while (input.hasNext()) {
+	    	levelTimer.add(input.nextInt());
+	    	levelShipDamage.add(input.nextInt());
+	    }
 	}
 	
 //	public void waitingStatus(String [] players, boolean [] isReady) {
@@ -40,24 +69,13 @@ public class GameClientEngine {
 	}
 	
 	public void letsGetStarted() {
-	  game.letsGetStarted();
+		game.waitingRoom.setVisible(false);
 	}
 	
 	public void getNewLevelSetup(int level) {
 		curLevel = level;
-	    levelCommands = new ArrayList<String>(0);
-	    levelButtons = new ArrayList<String>(0);
-	    playerButtons = new ArrayList<String>(0);
-      InputStream levelCommandsFile = getClass().getResourceAsStream("levelCommands" + level + ".txt");
-      InputStream levelButtonsFile = getClass().getResourceAsStream("levelButtons" + level + ".txt");
-      Scanner input = new Scanner(levelCommandsFile);
-      while(input.hasNext()) {
-        levelCommands.add(input.nextLine());
-      }
-      input = new Scanner(levelButtonsFile);
-      while(input.hasNext()) {
-        levelButtons.add(input.nextLine());
-      }
+		game.gameStartScreen = new GameStartScreen(level, levelTextArray.get(level - 1));
+	    
 	}
 	
 	public boolean isUser(String username) {
