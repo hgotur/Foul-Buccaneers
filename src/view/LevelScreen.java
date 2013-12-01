@@ -41,7 +41,7 @@ public class LevelScreen extends JFrame{
 	
 	ArrayList<JButton> buttons;
 	
-	Timer timer;
+	public Timer timer;
 	int timerTime;
 	
 	public LevelScreen(){

@@ -37,7 +37,7 @@ public class GameClientEngine {
 	    InputStream levelCommandsFile = getClass().getResourceAsStream("levelCommands.txt");
 	    InputStream levelButtonsFile = getClass().getResourceAsStream("levelButtons.txt");
 	    InputStream levelTextFile = getClass().getResourceAsStream("levelText.txt");
-	    InputStream clientLevelSettingsFile = getClass().getResourceAsStream("clientLevelSettings.txt");
+	    InputStream clientLevelSettingsFile = getClass().getResourceAsStream("levelSettings.txt");
 	    Scanner input = new Scanner(levelCommandsFile);
 	    while(input.hasNext()) {
 	      levelCommands.add(input.nextLine());
@@ -54,6 +54,8 @@ public class GameClientEngine {
 	    while (input.hasNext()) {
 	    	levelTimer.add(input.nextInt());
 	    	levelShipDamage.add(input.nextInt());
+	    	input.nextInt();
+	    	input.nextInt();
 	    }
 	}
 	
@@ -77,6 +79,10 @@ public class GameClientEngine {
 	
 	public void getNewLevelSetup(int level) {
 		curLevel = level;
+		if (levelScreen != null) {
+			levelScreen.timer.stop();
+			levelScreen.setVisible(false);
+		}
 		game.gameStartScreen = new GameStartScreen(level, levelTextArray.get(level - 1));
 	    
 	}
