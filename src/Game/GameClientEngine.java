@@ -29,8 +29,11 @@ public class GameClientEngine {
 	
 	  
 		  levelCommands = new ArrayList<String>(0);
-		    levelButtons = new ArrayList<String>(0);
-		    playerButtons = new ArrayList<String>(0);
+		  levelButtons = new ArrayList<String>(0);
+		  playerButtons = new ArrayList<String>(0);
+		  levelTextArray = new ArrayList<String>(0);
+		  levelTimer = new ArrayList<Integer>(0);
+		  levelShipDamage = new ArrayList<Integer>(0);
 	    InputStream levelCommandsFile = getClass().getResourceAsStream("levelCommands.txt");
 	    InputStream levelButtonsFile = getClass().getResourceAsStream("levelButtons.txt");
 	    InputStream levelTextFile = getClass().getResourceAsStream("levelText.txt");
