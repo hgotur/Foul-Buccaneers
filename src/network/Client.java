@@ -70,6 +70,10 @@ public class Client {
     case "GW":
     	game.gameWon();
     	break;
+    case "GAS":
+    	 JOptionPane.showMessageDialog(null, "Could not connect to the server. Game already in progress.", "Connection Error", JOptionPane.ERROR_MESSAGE);
+         System.exit(10);
+         break;
     /*case "GE":  // game end
         break;
     case "LS":  // level start

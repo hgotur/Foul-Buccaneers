@@ -121,7 +121,7 @@ public class WaitingScreen extends JFrame{
 		add(body, BorderLayout.CENTER);
 		
 		
-		ready = new JButton("I'm ready to play");
+		ready = new JButton("Ready to Start");
 		playerStatus = 0;
 		ready.setFont(new Font("serif", Font.PLAIN, 30));
 		JPanel bottom = new JPanel(new FlowLayout());
