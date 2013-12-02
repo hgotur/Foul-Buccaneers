@@ -7,6 +7,8 @@ import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import Game.*;
 
 public class Server {
@@ -29,7 +31,7 @@ public class Server {
     }
     catch (IOException ioe) {
       out.println("ERROR: Caught exception starting server");
-      out.println(ioe.getMessage());
+      JOptionPane.showMessageDialog(null, "Could not create a server. Are you connected to a network?", "Server Error", JOptionPane.ERROR_MESSAGE);
       System.exit(7);
     }
   }
