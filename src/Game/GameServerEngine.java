@@ -20,6 +20,7 @@ public class GameServerEngine {
   private ArrayList<Integer> levelShipDamage;
   private ArrayList<Integer> levelWinSettings;
   
+  public boolean gameWon = false;
   public boolean started = false;
   private int commandsSent;
   public int currentLevel;
@@ -118,18 +119,23 @@ public class GameServerEngine {
   }
   
   public void generateCommand(String player) {
-    int commandIndex = availableCommands.get(random.nextInt(availableCommands.size()));
-    activeCommands.add(new Command(player, commandIndex));
-    game.server.sendCommand(player, commandIndex);
-    this.commandsSent++;
-    if(this.commandsSent > winMoves) {
-      currentLevel++;
-      if(currentLevel > levelWinSettings.size()){
-        game.server.sendGameWin();
+    if(!gameWon){
+      if(this.commandsSent > winMoves) {
+        currentLevel++;
+        if(currentLevel > levelWinSettings.size()){
+          game.server.sendGameWin();
+          gameWon = true;
+        }
+        else{
+          game.server.sendPreparingLevel(currentLevel);
+          getNewLevelSetup(currentLevel);
+        }
       }
       else{
-        game.server.sendPreparingLevel(currentLevel);
-        getNewLevelSetup(currentLevel);
+        int commandIndex = availableCommands.get(random.nextInt(availableCommands.size()));
+        activeCommands.add(new Command(player, commandIndex));
+        game.server.sendCommand(player, commandIndex);
+        this.commandsSent++;
       }
     }
   }
