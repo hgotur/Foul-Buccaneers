@@ -124,7 +124,7 @@ public class GameServerEngine {
     this.commandsSent++;
     if(this.commandsSent > winMoves) {
       currentLevel++;
-      if(currentLevel >= levelWinSettings.size()){
+      if(currentLevel > levelWinSettings.size()){
         game.server.sendGameWin();
       }
       else{
