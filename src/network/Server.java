@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import Game.*;
 
-public class Server implements Runnable {
+public class Server {
   
   protected ArrayList<ClientServerSocket> sockets;
   private GameServerEngine game;
@@ -19,9 +19,6 @@ public class Server implements Runnable {
   public Server(GameServerEngine theGame) {
 	  sockets = new ArrayList<ClientServerSocket>(0);
     game = theGame;
-  }
-
-  public void run() {
     try {
       ServerSocket serverSocket = new ServerSocket(GameController.PORT);
       

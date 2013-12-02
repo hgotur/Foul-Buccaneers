@@ -41,8 +41,6 @@ public class GameController {
 	public void newGame() {
 	  serverEngine = new GameServerEngine(this);
   	server = new Server(serverEngine);
-    Thread serverThread = new Thread(server);
-    serverThread.start();
     
     try {
       joinGame(InetAddress.getLocalHost().getHostAddress(), player.name);
