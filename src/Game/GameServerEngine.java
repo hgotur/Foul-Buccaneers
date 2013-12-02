@@ -114,11 +114,11 @@ public class GameServerEngine {
     
     game.server.sendStartLevel();
     for(Player player : players) {
-      this.generateCommand(player.name);
+      this.generateCommand(player.name, false);
     }
   }
   
-  public void generateCommand(String player) {
+  public void generateCommand(String player, boolean failed) {
     if(!gameWon){
       if(this.commandsSent > winMoves) {
         currentLevel++;
@@ -135,7 +135,9 @@ public class GameServerEngine {
         int commandIndex = availableCommands.get(random.nextInt(availableCommands.size()));
         activeCommands.add(new Command(player, commandIndex));
         game.server.sendCommand(player, commandIndex);
-        this.commandsSent++;
+        if(!failed){
+        	commandsSent++;
+      	}
       }
     }
   }
@@ -156,7 +158,7 @@ public class GameServerEngine {
         Command complete = activeCommands.remove(i);
         i--;
         game.server.sendCommandComplete(complete.player, complete.index);
-        this.generateCommand(complete.player);
+        this.generateCommand(complete.player, false);
       }
     }
   }
@@ -171,7 +173,7 @@ public class GameServerEngine {
           return;
         }
         game.server.sendCommandFailed(failed.player, failed.index, this.shipDamage);
-        this.generateCommand(failed.player);
+        generateCommand(failed.player, true);
       }
     }
   }
