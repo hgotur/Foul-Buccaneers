@@ -1,23 +1,26 @@
 package network;
+
 import java.net.Socket;
 import java.net.ServerSocket;
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Vector;
-
 import javax.swing.JOptionPane;
 
 import static java.lang.System.out;
 
+
+/*
+ * The ClientServerSocket is used as a socket for both client and server.
+ * It is the code used from Professor Morgan's lecture slides.
+ */
 public class ClientServerSocket {
   private String ipAddr;
   private int portNum;
   private Socket socket;
   private DataOutputStream outData;
   private DataInputStream inData;
-  private DataOutputStream outData2;
-  private DataInputStream inData2;
   
   public ClientServerSocket(String inIPAddr, int inPortNum) {
     ipAddr = inIPAddr;
@@ -54,6 +57,9 @@ public class ClientServerSocket {
     }
   }
 
+  /*
+   * Used to send messages to socket.
+   */
   public boolean sendString(String strToSend) {
     boolean success = false;
     try {
@@ -69,6 +75,9 @@ public class ClientServerSocket {
     return (success);
   }
   
+  /*
+   * Used to receive messages that are sent to socket.
+   */
   public String recvString() {
     Vector< Byte > byteVec = new Vector< Byte >();
     byte [] byteAry;
