@@ -92,7 +92,7 @@ public class Server {
     serverSender.sendToAll("GW");
   }
   
-  public void translate(String command, ArrayList<String> values, int clientID) {  
+  public synchronized void translate(String command, ArrayList<String> values, int clientID) {  
     switch (command) {
       case "U": 
         game.addPlayer(values.get(0), Integer.parseInt(values.get(1)));

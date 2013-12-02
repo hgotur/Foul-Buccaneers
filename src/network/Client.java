@@ -24,7 +24,7 @@ public class Client {
     clientReceiver.start();
   }
   
-  public void translate(String command, ArrayList<String> value) {
+  public synchronized void translate(String command, ArrayList<String> value) {
 	String username;
     switch (command) {
     case "U":   // list of users + statuses
