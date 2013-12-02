@@ -2,8 +2,6 @@ package view;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -11,7 +9,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Color;
 
 import javax.swing.Box;
@@ -21,12 +18,18 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
-import javax.swing.JDialog;
 
 import Game.GameController;
 
+/**
+ * WaitingScreen
+ * This screen is the waiting room screen.
+ * It appears while players are joining a game
+ * and allows players to confirm they are ready
+ * and start a game.
+ * @author Pratik
+ */
 public class WaitingScreen extends JFrame{
 	
   GameController game;
@@ -45,7 +48,13 @@ public class WaitingScreen extends JFrame{
 	JPanel GetReady;
 	WaitingListener listen;
 	
-	
+	/**
+	 * Constructor
+	 * Sets up the waiting room and prints the
+	 * IP address for the server.
+	 * @param theGame
+	 * @param addr
+	 */
 	public WaitingScreen(GameController theGame, String addr){
 		super("Game Lobby");
 		
@@ -103,7 +112,6 @@ public class WaitingScreen extends JFrame{
 			checkMarks[i] = new JLabel("");
 			
 			playerStatus.add(playerLabels[i]);
-			//playerStatus.add(Box.createRigidArea(new Dimension(5,0)));
 			playerStatus.add(statusLabels[i]);
 			playerStatus.add(checkMarks[i]);
 			playerStatus.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -122,21 +130,12 @@ public class WaitingScreen extends JFrame{
 		
 		
 		ready = new JButton("Ready to Start");
-		playerStatus = 0;
 		ready.setFont(new Font("serif", Font.PLAIN, 30));
+		ready.addActionListener(new ReadyListener());
+		playerStatus = 0;
 		JPanel bottom = new JPanel(new FlowLayout());
 		bottom.add(ready);
 		add(bottom, BorderLayout.SOUTH);
-		
-		//GetReady = new JPanel(new BorderLayout());
-		
-		ready.addActionListener(new ReadyListener());
-		
-		//GetReady.add(ready,BorderLayout.WEST);
-		//GetReady.add(startGame, BorderLayout.EAST);
-
-		//add(status, BorderLayout.NORTH);
-		//add(GetReady, BorderLayout.SOUTH);
 		
 		setSize(850,700);
 		setVisible(true);
@@ -144,6 +143,11 @@ public class WaitingScreen extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
+	/**
+	 * ReadyListener
+	 * Action listener that is called when a player
+	 * says he's ready to start playing.
+	 */
 	public class ReadyListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			if (playerStatus == 0) {
@@ -159,8 +163,12 @@ public class WaitingScreen extends JFrame{
 		}
 	}
 	
+	/**
+	 * WaitingListener
+	 * An action listener called if a player
+	 * decides he's not ready.
+	 */
 	public class WaitingListener implements ActionListener{
-		
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource() == startGame){
 				setVisible(false);
@@ -169,6 +177,13 @@ public class WaitingScreen extends JFrame{
 		
 	}
 	
+	/**
+	 * AddPlayer
+	 * Adds a new player to the waiting room.
+	 * @param username
+	 * @param status
+	 * @param playerPosition
+	 */
 	public void addPlayer(String username, int status, int playerPosition) {
 		playerLabels[playerPosition].setText(username);
 		if(status > 0) {
@@ -181,20 +196,11 @@ public class WaitingScreen extends JFrame{
 		}
 	}
 	
-	public void waitingStatus(String [] waitingPlayers, boolean [] isReady) {
-		for (int i = 0; i < waitingPlayers.length; i++) {
-			playerLabels[i].setText(waitingPlayers[i]);
-			if (isReady[i] == true) {
-				statusLabels[i].setText("is aboard!");
-				checkMarks[i].setIcon(new ImageIcon(getClass().getResource("/view/images/checkmark.png")));
-			}
-			else {
-				statusLabels[i].setText("is not aboard!");
-				checkMarks[i].setIcon(null);
-			}
-		}
-	}
-	
+	/**
+	 * ClearsWaitingRoom
+	 * Clears the waiting room. Used when refreshing the
+	 * waiting room.
+	 */
 	public void clearWaitingRoom() {
 	  for(JLabel playerLabel : playerLabels) {
 	    playerLabel.setText("");
