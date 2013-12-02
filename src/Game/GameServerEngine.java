@@ -131,11 +131,7 @@ public class GameServerEngine {
       }
       game.server.sendLevelButtons(player.name, availableButtons);
     }
-
-    for (int command : availableCommands) {
-      System.out.println(levelCommands.get(command));
-    }
-
+    
     //Pause for a few seconds so players
     //have a chance to read the game start screen.
     try {
