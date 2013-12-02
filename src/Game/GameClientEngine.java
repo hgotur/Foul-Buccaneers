@@ -57,6 +57,9 @@ public class GameClientEngine {
 	    	input.nextInt();
 	    	input.nextInt();
 	    }
+	    for(String text : levelTextArray){
+	    	System.out.println(text);
+	    }
 	}
 	
 //	public void waitingStatus(String [] players, boolean [] isReady) {
@@ -130,11 +133,13 @@ public class GameClientEngine {
 	
 	public void endGame() {
 		levelScreen.setVisible(false);
+		levelScreen.timer.stop();
 		game.gameOverScreen = new GameOverScreen();
 	}
 	
 	public void gameWon() {
 		levelScreen.setVisible(false);
+		levelScreen.timer.stop();
 		game.gameWonScreen = new GameWonScreen();
 	}
 }
