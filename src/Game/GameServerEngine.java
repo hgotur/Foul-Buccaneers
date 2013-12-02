@@ -168,7 +168,7 @@ public class GameServerEngine {
       if(activeCommands.get(i).index == ID) {
         Command failed = activeCommands.remove(i);
         this.shipDamage--;
-        if(this.shipDamage == 0) {
+        if(this.shipDamage <= 0) {
           game.server.sendGameOver();
           return;
         }

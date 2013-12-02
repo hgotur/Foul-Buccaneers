@@ -80,7 +80,6 @@ public class Server {
   }
   
   public void sendCommandFailed(String player, int index, int damage) {
-    serverSender.sendToAll("F " + player + " " + index);
     serverSender.sendToAll("SD " + damage);
   }
   
