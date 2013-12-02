@@ -3,7 +3,6 @@ package network;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 /*
  * Client's version of the receiver. It receives strings from the server
  * and calls Client.translate(). It is threaded.

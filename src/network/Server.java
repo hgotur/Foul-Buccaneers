@@ -1,16 +1,17 @@
 package network;
 
-import static java.lang.System.out;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import javax.swing.JOptionPane;
 
 import Game.*;
 
+/*
+ * Part of the network that interacts with the game server engine.
+ * Receives information from the server, translates, and calls the
+ * GameServerEngine to take action.
+ */
 public class Server {
 
   protected ArrayList<ClientServerSocket> sockets;
@@ -18,9 +19,14 @@ public class Server {
   private ServerSender serverSender;
   private Thread serverAcceptThread;
 
+  /*
+   * Sets up the server accept thread that accepts client connections to the
+   * server. Also sets up the server socket and the server sender.
+   */
   public Server(GameServerEngine theGame) {
     sockets = new ArrayList<ClientServerSocket>(0);
     game = theGame;
+
     try {
       ServerSocket serverSocket = new ServerSocket(GameController.PORT);
 
@@ -30,8 +36,9 @@ public class Server {
 
       serverSender = new ServerSender(sockets);
     } catch (IOException ioe) {
-      out.println("ERROR: Caught exception starting server");
-      JOptionPane.showMessageDialog(null, "Could not create a server. Are you connected to a network?", "Server Error", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null,
+          "Could not create a server. Are you connected to a network?",
+          "Server Error", JOptionPane.ERROR_MESSAGE);
       System.exit(7);
     }
   }
@@ -40,14 +47,39 @@ public class Server {
     return game.started;
   }
 
+  /*
+   * Translates messages from the client and calls gameServerEngine to take
+   * appropriate action.
+   */
+  public synchronized void translate(String command, ArrayList<String> values,
+      int clientID) {
+    switch (command) {
+    case "U":
+      game.addPlayer(values.get(0), Integer.parseInt(values.get(1)));
+      break;
+    case "W":
+      game.waitingStateChange(values.get(0), Integer.parseInt(values.get(1)));
+      break;
+    case "B":
+      game.recievedButton(Integer.parseInt(values.get(0)));
+      break;
+    case "F":
+      game.commandFailed(Integer.parseInt(values.get(0)));
+      break;
+    default:
+      assert false;
+
+    }
+  }
+
+  /*
+   * The following functions create and send commands to the clients.
+   */
   public void sendPlayers(ArrayList<Player> players) {
     String message = "U";
-
     for (Player player : players) {
-      System.out.println("Sending " + player.name + " " + player.status);
       message += (" " + player.name + " " + player.status);
     }
-
     serverSender.sendToAll(message);
   }
 
@@ -91,27 +123,6 @@ public class Server {
 
   public void sendGameWin() {
     serverSender.sendToAll("GW");
-  }
-
-  public synchronized void translate(String command, ArrayList<String> values,
-      int clientID) {
-    switch (command) {
-    case "U":
-      game.addPlayer(values.get(0), Integer.parseInt(values.get(1)));
-      break;
-    case "W":
-      game.waitingStateChange(values.get(0), Integer.parseInt(values.get(1)));
-      break;
-    case "B":
-      game.recievedButton(Integer.parseInt(values.get(0)));
-      break;
-    case "F":
-      game.commandFailed(Integer.parseInt(values.get(0)));
-      break;
-    default:
-      assert false;
-
-    }
   }
 
 }

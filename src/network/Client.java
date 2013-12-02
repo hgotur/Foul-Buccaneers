@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
 
 import Game.*;
 
-
 /*
  * Part of the network that interacts with the game client engine.
  * Receives commands from the server, translates, and calls the
@@ -18,8 +17,8 @@ public class Client {
   private Receiver receiver;
 
   /*
-   * Takes IP Address and creates a connection with the server.
-   * Also takes a GameClientEngine so it can reference it when receiving commands.
+   * Takes IP Address and creates a connection with the server. Also takes a
+   * GameClientEngine so it can reference it when receiving commands.
    */
   public Client(GameClientEngine theGame, String ipAddr) {
     game = theGame;
@@ -33,7 +32,8 @@ public class Client {
   }
 
   /*
-   * Translates commands received from the server. Called by Receiver (the client receiver).
+   * Translates commands received from the server. Called by Receiver (the
+   * client receiver).
    */
   public synchronized void translate(String command, ArrayList<String> value) {
     String username;
@@ -99,7 +99,7 @@ public class Client {
   /*
    * The following functions send information to the server.
    */
-  
+
   public void sendUsername(String user, int status) {
     user = "U " + user + " " + status;
     sender.sendString(user);

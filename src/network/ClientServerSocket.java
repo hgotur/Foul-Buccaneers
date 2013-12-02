@@ -8,9 +8,6 @@ import java.io.IOException;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 
-import static java.lang.System.out;
-
-
 /*
  * The ClientServerSocket is used as a socket for both client and server.
  * It is the code used from Professor Morgan's lecture slides.
@@ -21,7 +18,7 @@ public class ClientServerSocket {
   private Socket socket;
   private DataOutputStream outData;
   private DataInputStream inData;
-  
+
   public ClientServerSocket(String inIPAddr, int inPortNum) {
     ipAddr = inIPAddr;
     portNum = inPortNum;
@@ -29,30 +26,29 @@ public class ClientServerSocket {
     outData = null;
     socket = null;
   }
-  
+
   public void startClient() {
     try {
       socket = new Socket(ipAddr, portNum);
       outData = new DataOutputStream(socket.getOutputStream());
       inData = new DataInputStream(socket.getInputStream());
-    }
-    catch (IOException ioe) {
-      out.println("ERROR: Unable to connect - is the server running?");
-      JOptionPane.showMessageDialog(null, "Could not connect to the server. Are you sure its running?", "Connection Error", JOptionPane.ERROR_MESSAGE);
+    } catch (IOException ioe) {
+      JOptionPane.showMessageDialog(null,
+          "Could not connect to the server. Are you sure its running?",
+          "Connection Error", JOptionPane.ERROR_MESSAGE);
       System.exit(10);
     }
   }
+
   public void startServer(ServerSocket serverSock) {
-    try{
-      out.println("Waiting for connection...");
+    try {
       socket = serverSock.accept();
       outData = new DataOutputStream(socket.getOutputStream());
       inData = new DataInputStream(socket.getInputStream());
-      out.println("Client connection accepted");
-    }
-    catch (IOException ioe) {
-      out.println("ERROR: Caught exception starting server");
-      JOptionPane.showMessageDialog(null, "Could not create a server. Are you connected to a network?", "Server Error", JOptionPane.ERROR_MESSAGE);
+    } catch (IOException ioe) {
+      JOptionPane.showMessageDialog(null,
+          "Could not create a server. Are you connected to a network?",
+          "Server Error", JOptionPane.ERROR_MESSAGE);
       System.exit(7);
     }
   }
@@ -64,23 +60,23 @@ public class ClientServerSocket {
     boolean success = false;
     try {
       outData.writeBytes(strToSend);
-      outData.writeByte(0); //send 0 to signal the end of the string
+      outData.writeByte(0); // send 0 to signal the end of the string
       success = true;
-    }
-    catch (IOException e) {
-      System.out.println("Caught IOException Writing To Socket Stream!");
-      JOptionPane.showMessageDialog(null, "Oh no! Someone left the game! Ye need all yer mateys to play!", "Game Over", JOptionPane.ERROR_MESSAGE);
+    } catch (IOException e) {
+      JOptionPane.showMessageDialog(null,
+          "Oh no! Someone left the game! Ye need all yer mateys to play!",
+          "Game Over", JOptionPane.ERROR_MESSAGE);
       System.exit(-1);
     }
     return (success);
   }
-  
+
   /*
    * Used to receive messages that are sent to socket.
    */
   public String recvString() {
-    Vector< Byte > byteVec = new Vector< Byte >();
-    byte [] byteAry;
+    Vector<Byte> byteVec = new Vector<Byte>();
+    byte[] byteAry;
     byte recByte;
     String receivedString = "";
     try {
@@ -94,10 +90,10 @@ public class ClientServerSocket {
         byteAry[ind] = byteVec.elementAt(ind).byteValue();
       }
       receivedString = new String(byteAry);
-    }
-    catch (IOException ioe) {
-      out.println("ERROR: receiving string from socket");
-      JOptionPane.showMessageDialog(null, "Oh no! Someone left the game! Ye need all yer mateys to play!", "Game Over", JOptionPane.ERROR_MESSAGE);
+    } catch (IOException ioe) {
+      JOptionPane.showMessageDialog(null,
+          "Oh no! Someone left the game! Ye need all yer mateys to play!",
+          "Game Over", JOptionPane.ERROR_MESSAGE);
       System.exit(8);
     }
     return (receivedString);
