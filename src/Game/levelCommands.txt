@@ -1,30 +1,29 @@
 Raise the Main Sails
 Incoming Ship! Fire all the Cannons
-The ship is gone. Jump Ship!
 Make those scurvy dogs walk the plank
 Incoming Wave! Hard te' Starboard
 There's a whale! Hard te' Port!
 Swab the Poop Deck ye scurvy dogs.
 Prepare to attack! Hoist the Jolly Roger!
 Aye Mateys. Drink the Rum!
-Get those cutlasses clean!
+Clean those cutlasses!
 Me parrot is hungry, feed me parrot!
-Get the gun powder on deck!
+Get me some gunpowder!
 Yer Swords be dull, sharpen yer swords!
-They're after yer Booty, hide yer Booty!
-Fire yer pistol at the charging enemy pirate!
-Yer hull be damaged, go patch yer hull!
+They're after yer Booty. Hide yer Booty!
+Fire the pistols! They be attacking us!
+Yer hull be damaged, go patch the hull!
 Spirits be low, sing a pirate song to cheer up yer crew!
-Yer crew be hungry, pass out provisions to them!
-Pull out yer spyglass and check the horizon for hostile ships!
+Yer crew be hungry, pass out provisions!
+There be hostile ships. Pull out yer spyglass scan the horizon!
 Check yer Map to see how many paces it be to X!
 Ye need to speed up, raise yer anchor!
 Cannonballs be running low, restock yer cannonballs!
-You have scurvy, eat some oranges to cure yerself!
+The crew has scurvy, eat some oranges!
 Yer out of food, restock yer provisions!
 Get yerself a bird's eye view, climb into the crow's nest!
 A few of your crew attempted mutiny, kill the dissenters!
-Time to grab the enemy's booty, board their ship!
+Time to grab the enemy's booty, board the enemy ship!
 Trick the British Navy, fly the Union Jack!
 Its time to lay low, hide in the cove!
 Write in yer Captain's Log about the recent happens on the ship!

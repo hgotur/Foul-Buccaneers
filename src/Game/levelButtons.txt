@@ -1,18 +1,17 @@
 Raise Sails
 Fire Cannons
-Jump Ship
 Walk Plank
 Hard Starboard
 Hard Port
 Swab the PoopDeck
 Hoist Jolly Roger
 Drink Rum
-Clean Cutlasses
+Clean the Cutlasses
 Feed the Parrot
-Get the gunpowder
-Sharpen Sword
+Get Gunpowder
+Sharpen Swords
 Hide Booty
-Fire Pistol
+Fire Pistols
 Patch Hull
 Sing a Pirate Song
 Pass Out Provisions
@@ -22,7 +21,7 @@ Raise Anchor
 Restock Cannonballs
 Eat Oranges
 Restock Provisions
-Enter Crow's Nest
+Climb Crow's Nest
 Kill Dissenters
 Board Enemy Ship
 Fly the Union Jack
