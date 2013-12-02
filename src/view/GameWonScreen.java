@@ -8,7 +8,6 @@ import javax.swing.JLabel;
  * GameWonScreen
  * This view appears at the end of the game
  * once all levels have been completed successfully
- * @author Pratik
  */
 public class GameWonScreen extends JFrame {
   /**

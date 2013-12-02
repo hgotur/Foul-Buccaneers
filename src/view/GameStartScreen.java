@@ -15,7 +15,6 @@ import javax.swing.JLabel;
  * GameStartScreen
  * This screen appears before each level starts
  * with a little information about the level
- * @author Pratik
  *
  */
 public class GameStartScreen extends JFrame {

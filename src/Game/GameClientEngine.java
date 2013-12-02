@@ -87,7 +87,6 @@ public class GameClientEngine {
       game.levelScreen.timer.stop();
       game.levelScreen.setVisible(false);
     }
-    
     game.gameStartScreen = new GameStartScreen(level, levelTextArray.get(level - 1));
   }
 

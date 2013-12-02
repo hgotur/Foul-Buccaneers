@@ -11,7 +11,6 @@ import java.util.Scanner;
  * the server, including generating commands,
  * starting and stopping games, assigning buttons
  * and any other server logic.
- * @author Pratik
  */
 public class GameServerEngine {
   private GameController game;
@@ -185,7 +184,6 @@ public class GameServerEngine {
    * Command
    * A command object that stores information
    * about an active command.
-   * @author Pratik
    */
   public class Command {
     public String player;

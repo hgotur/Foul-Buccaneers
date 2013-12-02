@@ -28,7 +28,6 @@ import Game.GameClientEngine;
  * This view is the main screen for the game.
  * Players play the game on this screen.
  * It displays the buttons and information for gameplay.
- * @author Pratik
  */
 public class LevelScreen extends JFrame {
   private GameClientEngine game;

@@ -21,7 +21,6 @@ import Game.Player;
  * JoinGameScreen
  * This dialog is used to get information from
  * a player to join an existing game.
- * @author Pratik
  */
 public class JoinGameScreen extends JDialog {
   JButton enter;

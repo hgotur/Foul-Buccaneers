@@ -9,10 +9,9 @@ import network.Client;
 import network.Server;
 
 /**
- * GameController Handles the views and setting up a new game with the server
+ * GameController
+ * Handles the views and setting up a new game with the server
  * and client. Doesn't handle game logic.
- * 
- * @author Pratik
  */
 public class GameController {
   // Views
@@ -23,6 +22,7 @@ public class GameController {
   protected GameStartScreen gameStartScreen;
   protected GameOverScreen gameOverScreen;
   protected GameWonScreen gameWonScreen;
+  protected LevelScreen levelScreen;
   // Networks
   protected Server server;
   protected Client client;

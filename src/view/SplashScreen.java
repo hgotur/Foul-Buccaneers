@@ -19,7 +19,6 @@ import Game.GameController;
  * The screen that appears when you
  * first start the game. With buttons
  * to start new games or join games.
- * @author Pratik
  */
 public class SplashScreen extends JFrame {
 

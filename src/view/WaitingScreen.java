@@ -28,7 +28,6 @@ import Game.GameController;
  * It appears while players are joining a game
  * and allows players to confirm they are ready
  * and start a game.
- * @author Pratik
  */
 public class WaitingScreen extends JFrame{
 	

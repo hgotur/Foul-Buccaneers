@@ -4,7 +4,6 @@ package Game;
  * Player
  * A player object storing information about
  * a player.
- * @author Pratik
  */
 public class Player {
 	  public String name;

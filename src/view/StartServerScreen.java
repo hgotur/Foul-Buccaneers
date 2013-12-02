@@ -21,7 +21,6 @@ import Game.Player;
  * StartServerScreen
  * A JDialog to collect information about starting
  * a new server.
- * @author Pratik
  */
 public class StartServerScreen extends JDialog {
 

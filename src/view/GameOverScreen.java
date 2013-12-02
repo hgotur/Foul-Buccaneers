@@ -8,7 +8,6 @@ import javax.swing.JLabel;
  * GameOverScreen
  * This screen appears when the players have failed and
  * the game is over.
- * @author Pratik
  */
 public class GameOverScreen extends JFrame {
   /**
